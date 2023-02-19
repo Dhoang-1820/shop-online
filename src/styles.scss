@@ -1,9 +1,50 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$shop-online-primary: mat.define-palette(mat.$indigo-palette);
+$shop-online-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$shop-online-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$shop-online-theme: mat.define-light-theme((
+  color: (
+    primary: $shop-online-primary,
+    accent: $shop-online-accent,
+    warn: $shop-online-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($shop-online-theme);
+
 /* Variriables */
 :root{
-	--khaki: #F0E68C;
+	// --khaki: #F0E68C;
+	--khaki: #ed1c24;
 	--khakiDark: #BDB76B;
-	--darkStaleGray: #2F4F4F;
+	// --darkStaleGray: #2F4F4F;
+	--darkStaleGray: #f1f1f1;
 	--white: #FFFFFF;
+	--black: #000000;
+	--red: #ed1c24;
+	--gray: #2c2c2c;
+
 }
 /* Import Font */
 @font-face{
@@ -28,10 +69,12 @@ hr{
 	border: 1px solid rgba(236, 240, 241,0.3);
 }
 .container{
-	width: 960px;
+	width: 1200px;
 	margin: 0 auto;
 }
 .active{
 	background-color: var(--darkStaleGray) !important;
 	color: var(--khaki) !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

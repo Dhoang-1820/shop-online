@@ -1,6 +1,6 @@
 <div class="container">
-    <main>
-        <div class="slider">
+  <main>
+    <!-- <div class="slider">
             <div class="slide-1">
                 <img src="assets/img/slider/slide-1.jpg">
                 <div class="slider-text">
@@ -24,166 +24,198 @@
                     <h2>Women's Collection</h2>
                     <a href="#">Shop Now</a>
                 </div>
-            </div>		 -->
-        </div> <!-- slider -->
+            </div>		 
+        </div> slider -->
 
-        <div class="new-product-section">
-            <div class="product-section-heading">
-                <h2>Tranding Products <img src="assets/img/icons/increase.png"></h2>
-                <h3>Most selling product for the month</h3>
-            </div>
-            <div class="product-content">
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img1.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Watches</h3>
-                        <h2>Gray Color Men's Watch</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.4500/-</p>
-                    </div>						
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img2.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Pants</h3>
-                        <h2>Levi's Jeans Pant</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.2000/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img3.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Watches</h3>
-                        <h2>Black Men's Watch</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.4000/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img4.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Shoes</h3>
-                        <h2>Nick Black Sneakers</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.3200/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img5.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Glasses</h3>
-                        <h2>Wood Frame Sun Glass</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.1200/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img6.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Women's / Hand Bags</h3>
-                        <h2>Leather Hand Bag</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.3800/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img7.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Shoes</h3>
-                        <h2>Men's Sneaker</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.3500/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img8.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Women's / Hand Bags</h3>
-                        <h2>Brown Leather Hand Bag</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.5200/-</p>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- New Product Section -->
+    <div class="banner">
+      <div class="carousel-wrapper">
+        <div class="carousel">
+          <ng-image-slider
+            [imageSize]="{ width: '820px', height: '403px', space: 4 }"
+            [infinite]="true"
+            [autoSlide]="3"
+            [showArrow]="true"
+            [arrowKeyMove]="true"
+            [images]="imgCollection"
+            #nav
+          ></ng-image-slider>
+        </div>
+        <div class="image-poster">
+          <div>
+            <img
+              width="307px"
+              src="https://ss-hn.fptvds.vn/images/2023/02/nam-moi-ron-rang-hang-ngan-uu-dai-614x397.jpg"
+              alt="img1"
+            />
+          </div>
+          <div>
+            <img
+              width="307px"
+              src="https://ss-hn.fptvds.vn/images/2022/sub-banner-bua-com-ngon-lanh-copy-01.jpg"
+              alt="img1"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="collection">
-            <div class="men-collection">
-                <h2>Men's Collection</h2>
-            </div>
-            <div class="women-collection">
-                <h2>Women's Collection</h2>
-            </div>
-        </div> <!-- Collection Section -->
+    <div class="new-product-section">
+      <div class="product-content">
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img1.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Watches</h3>
+            <h2>Gray Color Men's Watch</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.4500/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img2.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Pants</h3>
+            <h2>Levi's Jeans Pant</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.2000/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img3.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Watches</h3>
+            <h2>Black Men's Watch</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.4000/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img4.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Shoes</h3>
+            <h2>Nick Black Sneakers</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.3200/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img5.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Glasses</h3>
+            <h2>Wood Frame Sun Glass</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.1200/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img6.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Women's / Hand Bags</h3>
+            <h2>Leather Hand Bag</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.3800/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img7.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Shoes</h3>
+            <h2>Men's Sneaker</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.3500/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img8.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Women's / Hand Bags</h3>
+            <h2>Brown Leather Hand Bag</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.5200/-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- New Product Section -->
 
-        <div class="new-product-section">
-            <div class="product-section-heading">
-                <h2>Recommend Products <img src="assets/img/icons/good_quality.png"></h2>
-                <h3>OUR BEST PRODUCTS RECOMMENDED FOR YOU</h3>
-            </div>
-            <div class="product-content">
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img1.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Watches</h3>
-                        <h2>Gray Color Men's Watch</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.4500/-</p>
-                    </div>						
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img2.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Pants</h3>
-                        <h2>Levi's Jeans Pant</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.2000/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img3.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Watches</h3>
-                        <h2>Black Men's Watch</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.4000/-</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <a href="product.html">
-                        <img src="assets/img/product/img4.jpg">
-                    </a>
-                    <div class="product-detail">
-                        <h3>Men's / Shoes</h3>
-                        <h2>Nick Black Sneakers</h2>
-                        <a href="#">Add to Cart</a>
-                        <p>Rs.3200/-</p>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Recommend Product Section -->
-    </main> <!-- Main Area -->
+    <div class="collection">
+      <div class="men-collection">
+        <h2>Men's Collection</h2>
+      </div>
+      <div class="women-collection">
+        <h2>Women's Collection</h2>
+      </div>
+    </div>
+    <!-- Collection Section -->
+
+    <div class="new-product-section">
+      <div class="product-section-heading">
+        <h2>Sản phẩm đề xuất<img src="assets/img/icons/good_quality.png" /></h2>
+        <h3>Những sản phẩm tốt nhất được đề xuất cho bạn</h3>
+      </div>
+      <div class="product-content">
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img1.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Watches</h3>
+            <h2>Gray Color Men's Watch</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.4500/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img2.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Pants</h3>
+            <h2>Levi's Jeans Pant</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.2000/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img3.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Watches</h3>
+            <h2>Black Men's Watch</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.4000/-</p>
+          </div>
+        </div>
+        <div class="product">
+          <a href="product.html">
+            <img src="assets/img/product/img4.jpg" />
+          </a>
+          <div class="product-detail">
+            <h3>Men's / Shoes</h3>
+            <h2>Nick Black Sneakers</h2>
+            <a href="#">Add to Cart</a>
+            <p>Rs.3200/-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Recommend Product Section -->
+  </main>
+  <!-- Main Area -->
 </div>

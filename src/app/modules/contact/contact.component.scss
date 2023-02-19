@@ -1,0 +1,67 @@
+main {
+  height: auto;
+  background-color: var(--white);
+  padding: 30px;
+  margin-top: -40px;
+  margin-bottom: -40px;
+  box-shadow: 0 0 2px #808080;
+  position: relative;
+  z-index: 100;
+}
+
+main form.checkout-form .form-group {
+  margin: 10px 5px;
+  width: calc(100% - 10px);
+}
+main form.checkout-form label {
+  color: var(--darkStaleGray);
+  display: block;
+  margin-bottom: 6px;
+}
+main form.checkout-form .form-group input,
+main form.checkout-form .form-group select,
+main form.checkout-form .form-group textarea {
+  width: 100%;
+  padding: 8px 5px;
+}
+main form.checkout-form input:focus,
+main form.checkout-form select:focus,
+main form.checkout-form textarea:focus {
+  outline: 1px solid var(--darkStaleGray);
+}
+main h2 {
+  color: var(--darkStaleGray);
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+main .contact {
+  padding: 30px;
+}
+main .contact .heading {
+  text-align: center;
+}
+main .contact .heading h2 {
+  color: var(--darkStaleGray);
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+main .contact form {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+main .contact form input[type="submit"] {
+  background-color: var(--khaki);
+  border: 1px solid transparent;
+  color: var(--darkStaleGray);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.5s;
+  display: inline;
+}
