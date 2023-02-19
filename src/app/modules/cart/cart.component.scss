@@ -8,6 +8,23 @@ main{
 	position: relative;
 	z-index: 100;
 }
+main .breadcrumb {
+	background-color: var(--khaki);
+	padding: 10px 0;
+	margin-bottom: 25px;
+  }
+  main .breadcrumb ul {
+	display: flex;
+	justify-content: flex-start;
+	list-style: none;
+  }
+  main .breadcrumb ul li {
+	padding: 0 10px;
+  }
+  main .breadcrumb ul li a {
+	color: var(--darkStaleGray);
+	text-decoration: none;
+  }
 /* Content Section === Cart Page */
 main .cart-page{
 	max-height: 580px;

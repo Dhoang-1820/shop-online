@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './modules/layout/header/header.component';
+import { AboutComponent } from './modules/about/about.component';
+import { AccountComponent } from './modules/account/account.component';
+import { CartComponent } from './modules/cart/cart.component';
+import { CheckoutComponent } from './modules/checkout/checkout.component';
+import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { FooterComponent } from './modules/layout/footer/footer.component';
-import { CartComponent } from './modules/cart/cart.component';
+import { HeaderComponent } from './modules/layout/header/header.component';
+import { ProductComponent } from './modules/product/product.component';
+import { ShopComponent } from './modules/shop/shop.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CheckboxModule } from 'primeng/checkbox';
+import { NgImageSliderModule } from 'ng-image-slider';
+
 
 @NgModule({
   declarations: [
@@ -14,11 +27,24 @@ import { CartComponent } from './modules/cart/cart.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    CartComponent
+    CartComponent,
+    AccountComponent,
+    ContactComponent,
+    AboutComponent,
+    ShopComponent,
+    CheckoutComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    CheckboxModule,
+    NgImageSliderModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

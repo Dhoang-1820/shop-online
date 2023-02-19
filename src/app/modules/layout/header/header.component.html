@@ -1,100 +1,112 @@
 <header>
-    <div class="container">
-        <div class="brand">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="./assets/img/icons/online_shopping.png">
-                    <div class="logo-text">
-                        <p class="big-logo">Ecommerce</p>
-                        <p class="small-logo">online shop</p>
+    <div id="header-wrapper" #header_parent>
+        <div class="container">
+            <div class="brand">
+                <div class="logo">
+                    <div>
+                        <a href="index.html">
+                            <img src="./assets/img/icons/online_shopping.png">
+                            <div class="logo-text">
+                                <p class="big-logo">Ecommerce</p>
+                                <p class="small-logo">online shop</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div> <!-- logo -->
-            <div class="shop-icon">
-                <div class="dropdown">
-                    <img src="./assets/img/icons/account.png">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="orders.html">My Orders</a></li>
-                        </ul>
+                    <div class="search-bar">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="search" placeholder="Tìm kiếm sản phẩm muốn mua">
+                                <img src="./assets/img/icons/search.png">
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="dropdown">
-                    <img src="./assets/img/icons/heart.png">
-                    <div class="dropdown-menu wishlist-item">
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><img src="./assets/img/product/img1.jpg"></td>
-                                    <td>product name</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="./assets/img/product/img2.jpg"></td>
-                                    <td>product name</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div> <!-- logo -->
+                <div class="shop-icon">
+                    <div class="dropdown">
+                        <div class="action-wrapper">
+                            <i class="pi pi-shopping-cart icon-header"></i>
+                            <span>
+                                Giỏ hàng (1)
+                            </span>
+                        </div>
+                        <div class="dropdown-menu cart-item">
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th class="center">Price</th>
+                                        <th class="center">Qty.</th>
+                                        <th class="center">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><img src="./assets/img/product/img1.jpg"></td>
+                                        <td>product name</td>
+                                        <td class="center">1200</td>
+                                        <td class="center">2</td>
+                                        <td class="center">2400</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="./assets/img/product/img2.jpg"></td>
+                                        <td>product name</td>
+                                        <td class="center">1500</td>
+                                        <td class="center">2</td>
+                                        <td class="center">3000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
-                </div>
-                <div class="dropdown">
-                    <img src="./assets/img/icons/shopping_cart.png">
-                    <div class="dropdown-menu cart-item">
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th class="center">Price</th>
-                                    <th class="center">Qty.</th>
-                                    <th class="center">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><img src="./assets/img/product/img1.jpg"></td>
-                                    <td>product name</td>
-                                    <td class="center">1200</td>
-                                    <td class="center">2</td>
-                                    <td class="center">2400</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="./assets/img/product/img2.jpg"></td>
-                                    <td>product name</td>
-                                    <td class="center">1500</td>
-                                    <td class="center">2</td>
-                                    <td class="center">3000</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="dropdown">
+                        <div class="action-wrapper">
+                            <i class="pi pi-user icon-header"></i>
+                            <span>
+                                Tài khoản
+                            </span>
+                        </div>
+                        <div class="dropdown-menu user">
+                            <ul>
+                                <li><a href="account.html">My Account</a></li>
+                                <li><a href="orders.html">My Orders</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div> <!-- shop icons -->
-        </div> <!-- brand -->
-
+                    
+                </div> <!-- shop icons -->
+            </div> <!-- brand -->
+    
+            
+        </div> <!-- container -->
+    </div> <!-- header -->
+    
+    <div class="navigation-bar">
         <div class="menu-bar">
             <div class="menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a routerLink="/home    ">Home</a></li>
+                    <li><a routerLink="/shop">Shop</a></li>
+                    <li><a routerLink="/about">About</a></li>
+                    <li><a routerLink="/contact">Contact</a></li>
                 </ul>
             </div>
-            <div class="search-bar">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="Search">
-                        <img src="./assets/img/icons/search.png">
-                    </div>
-                </form>
-            </div>
+            
         </div> <!-- menu -->
-    </div> <!-- container -->
-</header> <!-- header -->
+    </div>
+    <script type="text/javascript">
+       var header = document.getElementById("header-wrapper");
+       
+        window.onscroll = function(e) {
+            console.log(header)
+            if(window.scrollY) {
+                if(window.pageYOffset > 50) {
+                    header.style.height = 30;
+                } else {
+                    header.style.height = 50;
+                }
+            }
+        }
+    </script>
+</header>
