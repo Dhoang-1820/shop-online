@@ -1,13 +1,7 @@
 <div class="container">
     <main>
         <div class="breadcrumb">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li> / </li>
-                <li><a href="shop.html">Shop</a></li>
-                <li> / </li>
-                <li>Cart</li>
-            </ul>
+            <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
         </div> <!-- End of Breadcrumb-->
 
         <h2>Shopping Cart</h2>
@@ -49,11 +43,12 @@
                                 <a href="">x</a> Remove
                             </td>
                             <td class="qty" style="width: 15%;">
-                                <div class="prev">-</div>
-                                <div class="next">+</div>
-                                <input type="number" name="cartNumber" class="cartNumber" value="1" min="1" max="10">
-                                <br><br>
-                                <h3>Rs.1200</h3>
+                                <div>
+                                    <p-inputNumber styleClass="input-styling" [(ngModel)]="value18" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" 
+                                        [allowEmpty]="false" [min]="0"
+                                        decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                                    </p-inputNumber>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -77,11 +72,7 @@
                     </tbody>	
                 </table>
                 <div class="pagination">
-                    <ul>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
+                    <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
                 </div>
             </div>
             <div class="cart-summary">

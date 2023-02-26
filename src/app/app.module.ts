@@ -19,7 +19,17 @@ import { ShopComponent } from './modules/shop/shop.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CheckboxModule } from 'primeng/checkbox';
 import { NgImageSliderModule } from 'ng-image-slider';
-
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import {MatIconModule} from '@angular/material/icon';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import {PaginatorModule} from 'primeng/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonModule} from '@angular/material/button';
+import { WrapperComponent } from './modules/wrapper/wrapper.component'
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -33,18 +43,28 @@ import { NgImageSliderModule } from 'ng-image-slider';
     AboutComponent,
     ShopComponent,
     CheckoutComponent,
-    ProductComponent
+    ProductComponent,
+    WrapperComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
     BrowserAnimationsModule,
     MatSlideToggleModule,
     CheckboxModule,
     NgImageSliderModule,
-    
+    BreadcrumbModule,
+    MatIconModule,
+    InputNumberModule,
+    MatFormFieldModule,
+    MatInputModule,
+    PaginatorModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatButtonModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

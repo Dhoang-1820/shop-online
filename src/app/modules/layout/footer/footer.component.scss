@@ -1,16 +1,12 @@
 footer{
-	height: 322px;
 	background-color: var(--gray); 
 }
 footer .footer-widget{
-	padding-top: 70px;
-	margin-bottom: 20px;
 	display: flex;
 	justify-content: space-between;
 }
 footer .footer-widget .widget{
 	width: 300px;
-	height: 190px;
 	padding: 20px;
 	color: var(--white);
 }

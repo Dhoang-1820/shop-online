@@ -30,35 +30,36 @@
                             </span>
                         </div>
                         <div class="dropdown-menu cart-item">
-                            <table border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Product Name</th>
-                                        <th class="center">Price</th>
-                                        <th class="center">Qty.</th>
-                                        <th class="center">Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><img src="./assets/img/product/img1.jpg"></td>
-                                        <td>product name</td>
-                                        <td class="center">1200</td>
-                                        <td class="center">2</td>
-                                        <td class="center">2400</td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./assets/img/product/img2.jpg"></td>
-                                        <td>product name</td>
-                                        <td class="center">1500</td>
-                                        <td class="center">2</td>
-                                        <td class="center">3000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="cart-list">
+                                <h5 class="cart-list-heading"></h5>
+                                <div class="list-item"> 
+                                    <div class="product-img">
+                                        <img src="assets/img/product/img5.jpg" />
+                                    </div>
+                                    <div class="description">
+                                        <p class="title">product</p>
+                                        <p class="units">ĐVT: product</p>
+                                        <div class="details">
+                                            <p class="quantity">x</p>
+                                            <p class="price">
+                                               price
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-total">
+                                <span class="total-quantity"></span>
+                                <span></span>
+                                <span class="total-money"> </span>
+                            </div>
+                            <div class="cart-footer">
+                                <button class="cart-btn"></button>
+                                <button class="cart-btn active">
+    
+                                </button>
+                            </div>
                         </div>
-                        
                     </div>
                     <div class="dropdown">
                         <div class="action-wrapper">
@@ -69,8 +70,8 @@
                         </div>
                         <div class="dropdown-menu user">
                             <ul>
-                                <li><a href="account.html">My Account</a></li>
-                                <li><a href="orders.html">My Orders</a></li>
+                                <li><a routerLink="/account">Tài khoản của tôi</a></li>
+                                <li><a routerLink="/cart">Đơn hàng của tôi</a></li>
                             </ul>
                         </div>
                     </div>
@@ -86,27 +87,23 @@
         <div class="menu-bar">
             <div class="menu">
                 <ul>
-                    <li><a routerLink="/home    ">Home</a></li>
-                    <li><a routerLink="/shop">Shop</a></li>
-                    <li><a routerLink="/about">About</a></li>
-                    <li><a routerLink="/contact">Contact</a></li>
+                    <li><a routerLink="/home">Trang chủ</a></li>
+                    <li><a routerLink="/shop">Cửa hàng</a></li>
+                    <li><a routerLink="/about">Thông tin</a></li>
+                    <li><a routerLink="/contact">Liên hệ</a></li>
                 </ul>
             </div>
-            
+            <div class="actions"> 
+                <div class= "action-details">
+                    <mat-icon> mail_outline</mat-icon>
+                    <span>Tin tức cửa hàng</span>
+                </div>
+                <div class= "action-details">
+                    <mat-icon>headset_mic</mat-icon>
+                    <span>Tư vấn mua hàng</span>
+                </div>
+            </div>
         </div> <!-- menu -->
+        
     </div>
-    <script type="text/javascript">
-       var header = document.getElementById("header-wrapper");
-       
-        window.onscroll = function(e) {
-            console.log(header)
-            if(window.scrollY) {
-                if(window.pageYOffset > 50) {
-                    header.style.height = 30;
-                } else {
-                    header.style.height = 50;
-                }
-            }
-        }
-    </script>
 </header>

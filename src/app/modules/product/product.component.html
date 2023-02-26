@@ -1,1 +1,126 @@
-<p>product works!</p>
+<div class="container">
+    <main>
+        <div class="breadcrumb">
+            <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+        </div> <!-- End of Breadcrumb-->
+
+        <div class="single-product">
+            <div class="images-section">
+                <div class="larg-img">
+                    <img src="img/product/img1.jpg">
+                </div>
+                <div class="small-img">
+                    <a class="fancybox" rel="group" href="img/product/img2.jpg">
+                        <img src="img/product/img2.jpg">
+                    </a>
+                    <a class="fancybox" rel="group" href="img/product/img3.jpg">
+                        <img src="img/product/img3.jpg">
+                    </a>
+                    <a class="fancybox" rel="group" href="img/product/img4.jpg">
+                        <img src="img/product/img4.jpg">
+                    </a>
+                    <a class="fancybox" rel="group" href="img/product/img5.jpg">
+                        <img src="img/product/img5.jpg">
+                    </a>
+                </div>
+            </div> <!-- End of Images Section-->
+
+            <div class="product-detail">
+                <div class="product-name">
+                    <h2>Product Name</h2>
+                </div>
+                <div class="product-price">
+                    <h3>Rs.4,500/-</h3>
+                </div>
+                <hr>
+                <div class="product-description">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in leo leo. Donec aliquet mauris ac consequat ornare. Pellentesque eget leo tempor, venenatis mauris sed, viverra ante. Donec tincidunt mauris vel tincidunt ultricies. Sed sed libero hendrerit elit gravida vulputate.</p>
+                </div>
+                <hr>
+                <div class="product-cart">
+                    <form id="cart-form">
+                        <div class="form-group">
+                            <p-inputNumber class="change-qty-btn" [(ngModel)]="value18" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" 
+                                [allowEmpty]="false" [min]="0"
+                                decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                            </p-inputNumber>
+                        </div>
+                    </form>
+                    <form id="wishlist-form">
+                        <div class="form-group">
+                            <input type="checkbox" class="wishlist" name="wishlist"> Add To Wishlist
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                <div class="product-meta">
+                    <p><b>Category: </b> Product</p>
+                    <p><b>Share This Product: </b> Facebook, Twitter</p>
+                </div>
+            </div> <!-- End of Product Detail-->
+        </div>
+        <hr>
+        <div class="product-long-description">
+            <h3>Product Description</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in leo leo. Donec aliquet mauris ac consequat ornare. Pellentesque eget leo tempor, venenatis mauris sed, viverra ante. Donec tincidunt mauris vel tincidunt ultricies. Sed sed libero hendrerit elit gravida vulputate. 
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in leo leo. Donec aliquet mauris ac consequat ornare. Pellentesque eget leo tempor, venenatis mauris sed, viverra ante. Donec tincidunt mauris vel tincidunt ultricies. Sed sed libero hendrerit elit gravida vulputate. 
+            </p>
+        </div>
+        <hr>
+        <div class="new-product-section">
+            <div class="product-section-heading">
+                <h2>Recommend Products <img src="img/icons/good_quality.png"></h2>
+                <h3>OUR BEST PRODUCTS RECOMMENDED FOR YOU</h3>
+            </div>
+            <div class="product-content">
+                <div class="product">
+                    <a href="product.html">
+                        <img src="img/product/img1.jpg">
+                    </a>
+                    <div class="product-detail">
+                        <h3>Men's / Watches</h3>
+                        <h2>Gray Color Men's Watch</h2>
+                        <a href="#">Add to Cart</a>
+                        <p>Rs.4500/-</p>
+                    </div>						
+                </div>
+                <div class="product">
+                    <a href="product.html">
+                        <img src="img/product/img2.jpg">
+                    </a>
+                    <div class="product-detail">
+                        <h3>Men's / Pants</h3>
+                        <h2>Levi's Jeans Pant</h2>
+                        <a href="#">Add to Cart</a>
+                        <p>Rs.2000/-</p>
+                    </div>
+                </div>
+                <div class="product">
+                    <a href="product.html">
+                        <img src="img/product/img3.jpg">
+                    </a>
+                    <div class="product-detail">
+                        <h3>Men's / Watches</h3>
+                        <h2>Black Men's Watch</h2>
+                        <a href="#">Add to Cart</a>
+                        <p>Rs.4000/-</p>
+                    </div>
+                </div>
+                <div class="product">
+                    <a href="product.html">
+                        <img src="img/product/img4.jpg">
+                    </a>
+                    <div class="product-detail">
+                        <h3>Men's / Shoes</h3>
+                        <h2>Nick Black Sneakers</h2>
+                        <a href="#">Add to Cart</a>
+                        <p>Rs.3200/-</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Recommend Product Section -->
+    </main> <!-- Main Area -->
+</div>

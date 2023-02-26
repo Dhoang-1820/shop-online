@@ -60,6 +60,7 @@ $shop-online-theme: mat.define-light-theme((
 	font-weight: normal;
 	box-sizing: border-box; 
 }
+
 body{
 	width: 100%;
 	height: 100vh;
@@ -76,5 +77,14 @@ hr{
 	background-color: var(--darkStaleGray) !important;
 	color: var(--khaki) !important;
 }
+main {
+	height: auto;
+	background-color: var(--white);
+	padding: 30px 30px 10px 30px;
+	box-shadow: 0 0 2px #808080;
+	position: relative;
+	z-index: 1;
+	margin-top: 120px;
+  }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

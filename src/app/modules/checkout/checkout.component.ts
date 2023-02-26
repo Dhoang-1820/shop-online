@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { AddressService } from 'src/app/services/address.service';
 
@@ -15,10 +16,25 @@ export class CheckoutComponent implements OnInit {
   districtSelected: any;
   wardSelected: any;
 
+  items!: MenuItem[];
+    
+  home!: MenuItem;
+
+  favoriteSeason!: string;
+
+  seasons: string[] = ['Cash on Delivery', 'Easypaisa Account', ' Bank Transferred', 'Autumn'];
+
   constructor(private addressService: AddressService) { 
     this.provices = [];
     this.districts = [];
     this.wards = [];
+    this.items = [
+      {label: 'Category'},
+      {label: 'Men'},
+      {label: 'Watches'}
+    ];
+    
+    this.home = {icon: 'pi pi-home'};
   }
 
   ngOnInit(): void {

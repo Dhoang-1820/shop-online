@@ -1,20 +1,15 @@
-main {
-  height: auto;
-  background-color: var(--white);
-  padding: 30px;
-  margin-top: -40px;
-  margin-bottom: -40px;
-  box-shadow: 0 0 2px #808080;
-  position: relative;
-  z-index: 100;
+
+.form-field {
+  width: 100%;
 }
+
 
 main form.checkout-form .form-group {
   margin: 10px 5px;
   width: calc(100% - 10px);
 }
 main form.checkout-form label {
-  color: var(--darkStaleGray);
+  color: var(--gray);
   display: block;
   margin-bottom: 6px;
 }
@@ -30,10 +25,14 @@ main form.checkout-form textarea:focus {
   outline: 1px solid var(--darkStaleGray);
 }
 main h2 {
-  color: var(--darkStaleGray);
+  color: var(--black);
   font-size: 20px;
   text-transform: uppercase;
   margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
 }
 
 main .contact {
@@ -52,7 +51,7 @@ main .contact .heading h2 {
   margin-bottom: 10px;
 }
 main .contact form {
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 40px;
 }
