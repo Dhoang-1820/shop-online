@@ -1,173 +1,165 @@
-main{
-	height: auto;
-	background-color: var(--white);
-	padding: 30px;
-	margin-top: -40px;
-	margin-bottom: -40px;
-	box-shadow: 0 0 2px #808080;
-	position: relative;
-	z-index: 100;
+
+
+::ng-deep .input-styling {
+  height: 35px;
 }
+
+::ng-deep .input-styling input {
+  width: 34px !important;
+}
+
+::ng-deep .input-styling button {
+  width: 30px !important;
+}
+
 main .breadcrumb {
-	background-color: var(--khaki);
-	padding: 10px 0;
-	margin-bottom: 25px;
-  }
-  main .breadcrumb ul {
-	display: flex;
-	justify-content: flex-start;
-	list-style: none;
-  }
-  main .breadcrumb ul li {
-	padding: 0 10px;
-  }
-  main .breadcrumb ul li a {
-	color: var(--darkStaleGray);
-	text-decoration: none;
-  }
+  padding: 10px 0;
+  margin-bottom: 25px;
+}
+main .breadcrumb ul {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+}
+main .breadcrumb ul li {
+  padding: 0 10px;
+}
+main .breadcrumb ul li a {
+  color: var(--darkStaleGray);
+  text-decoration: none;
+}
 /* Content Section === Cart Page */
-main .cart-page{
-	max-height: 580px;
-	display: flex;
-	justify-content: space-between;
-	padding: 10px;
+main .cart-page {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
 /* Content main === Cart Page === Cart Items */
-main .cart-page .cart-items{
-	width: 70%;
+main .cart-page .cart-items {
+  width: 70%;
 }
-main h2{
-	color: var(--darkStaleGray);
-	font-size: 20px;
-	text-transform: uppercase;
-	margin-bottom: 10px;
+main h2 {
+  color: var(--gray);
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
-main .cart-page .cart-items table{
-	width: 100%;
+main .cart-page .cart-items table {
+  width: 100%;
 }
-main .cart-page .cart-items table .qty{
-	text-align: center;
-	position: relative;
+main .cart-page .cart-items table .qty {
+  text-align: center;
+  position: relative;
 }
-main .cart-page .cart-items tbody img{
-	width: 100px;
-	height: 80px;
-	margin-right: 3px;
+
+.change-qty-btn {
+  width: 40px;
 }
-main .cart-page .cart-items table th{
-	border-bottom: 1px solid rgba(236, 240, 241,0.3);
-	text-align: left;
-	padding: 5px 0;
+
+main .cart-page .cart-items tbody img {
+  width: 100px;
+  height: 80px;
+  margin-right: 3px;
 }
-main .cart-page .cart-items table td{
-	color: var(--darkStaleGray);
-	border-bottom: 1px solid rgba(236, 240, 241,0.3);
-	padding: 8px 0;
+main .cart-page .cart-items table th {
+  border-bottom: 1px solid rgba(236, 240, 241, 0.3);
+  text-align: left;
+  padding: 5px 0;
 }
-main .cart-page .cart-items table td a{
-	color: var(--white);
-	background-color: red;
-	padding: 1px 7px;
-	text-decoration: none;
-	border-radius: 2px;
+main .cart-page .cart-items table td {
+  color: var(--gray);
+  border-bottom: 1px solid rgba(236, 240, 241, 0.3);
+  padding: 8px 0;
 }
-main .cart-page .cart-items table td a:hover{
-	background-color: var(--darkStaleGray);
+main .cart-page .cart-items table td a {
+  color: var(--white);
+  background-color: red;
+  padding: 1px 7px;
+  text-decoration: none;
+  border-radius: 2px;
 }
-main .cart-page .cart-items .pagination ul{
-	width: 60%;
-	display: flex;
-	justify-content: flex-start;
-	list-style: none;
-	margin-top: 10px;
+main .cart-page .cart-items table td a:hover {
+  background-color: var(--red);
 }
-main .cart-page .cart-items .pagination ul li a{
-	padding: 3px 8px;
-	margin-right: 5px;
-	color: var(--khaki);
-	background-color: var(--darkStaleGray);
-	text-decoration: none;
-}
-main .cart-page .cart-items .pagination ul li a:hover{
-	color: var(--darkStaleGray);
-	background-color: var(--khaki);
-}
+
 input.cartNumber::-webkit-outer-spin-button,
 input.cartNumber::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input.cartNumber{
-	width: 50px;
-	height: 25px;
-	position: absolute;
-	padding: 0 5px;
-	top: 20%;
-	left: 23px; 
+input.cartNumber {
+  width: 50px;
+  height: 25px;
+  position: absolute;
+  padding: 0 5px;
+  top: 20%;
+  left: 23px;
 }
-div.prev{
-	width: 30px;
-	height: 25px;
-	position: absolute;
-	left: -10px;
-	top: 20%;
-	background-color: var(--darkStaleGray);
-	color: var(--khaki);
-	border-radius: 2px;
-	padding-top: 4px;
-	z-index: 1000;
-	cursor: pointer;
+div.prev {
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  left: -10px;
+  top: 20%;
+  background-color: var(--darkStaleGray);
+  color: var(--khaki);
+  border-radius: 2px;
+  padding-top: 4px;
+  z-index: 1000;
+  cursor: pointer;
 }
-div.next{
-	width: 30px;
-	height: 25px;
-	position: absolute;
-	right: -10px;
-	top: 20%;
-	background-color: var(--darkStaleGray);
-	color: var(--khaki);
-	border-radius: 2px;
-	padding-top: 4px;
-	z-index: 1000;
-	cursor: pointer;
+div.next {
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  right: -10px;
+  top: 20%;
+  background-color: var(--darkStaleGray);
+  color: var(--khaki);
+  border-radius: 2px;
+  padding-top: 4px;
+  z-index: 1000;
+  cursor: pointer;
 }
 div.prev:hover,
-div.next:hover{
-	background-color: var(--khaki);
-	color: var(--darkStaleGray);
+div.next:hover {
+  background-color: var(--khaki);
+  color: var(--darkStaleGray);
 }
 /* Content Section === Cart Page === Cart Summary */
-main .cart-summary{
-	width: 25%;
-	height: 220px;
-	padding: 5px;
-	border: 1px solid rgba(236, 240, 241,0.3);
-	margin-top: 28px;
+main .cart-summary {
+  width: 25%;
+  height: 220px;
+  padding: 5px;
+  border: 1px solid rgba(236, 240, 241, 0.3);
+  margin-top: 28px;
 }
-main .cart-summary .checkout-total h3{
-	background-color: var(--darkStaleGray);
-	color: var(--khaki);
-	text-transform: uppercase;
-	padding: 10px;
+main .cart-summary .checkout-total h3 {
+  background-color: var(--darkStaleGray);
+  color: var(--khaki);
+  text-transform: uppercase;
+  padding: 10px;
 }
-main .cart-summary .checkout-total ul{
-	list-style: none;
-	padding: 10px;
+main .cart-summary .checkout-total ul {
+  list-style: none;
+  padding: 10px;
 }
-main .cart-summary .checkout-total ul li{
-	margin-bottom: 10px;
+main .cart-summary .checkout-total ul li {
+  margin-bottom: 10px;
 }
-main .cart-summary .checkout-total ul li a{
-	background-color: var(--khaki);
-	color: var(--darkStaleGray);
-	text-transform: uppercase;
-	text-decoration: none;
-	text-align: center;
-	padding: 5px 8px;
-	margin-top: 20px;
-	display: block;
+main .cart-summary .checkout-total ul li a {
+  background-color: var(--khaki);
+  color: var(--darkStaleGray);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  padding: 5px 8px;
+  margin-top: 20px;
+  display: block;
 }
-main .cart-summary .checkout-total ul li a:hover{
-	background-color: var(--darkStaleGray);
-	color: var(--khaki);
+main .cart-summary .checkout-total ul li a:hover {
+  background-color: var(--red);
+}
+.pagination {
+  margin-top: 20px;
 }
