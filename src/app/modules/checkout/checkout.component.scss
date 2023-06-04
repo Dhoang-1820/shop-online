@@ -1,4 +1,47 @@
 
+.progress-spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.btn-submit {
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 20px;
+  width: 100%;
+}
+
+/* Transparent Overlay */
+.progress-spinner:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.53);
+}
+
+.spinner {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  right: 50%;
+}
+
+.container {
+  min-height: 75vh;
+}
+
 main h2 {
   color: var(--black);
   font-size: 20px;
@@ -28,6 +71,7 @@ main .checkout-page .billing-detail h4 {
   padding: 5px;
   margin-bottom: 10px;
 }
+
 main form.checkout-form .form-group {
   margin: 10px 5px;
   width: calc(100% - 10px);

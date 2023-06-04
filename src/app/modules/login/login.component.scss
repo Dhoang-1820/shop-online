@@ -1,0 +1,110 @@
+.wrapper {
+    background-image: url(https://identity.teko.vn/assets/background.svg);
+    background-color: #f0f8ff;
+    background-repeat: no-repeat;
+    background-position: center 110px;
+    background-size: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    min-height: 75vh;
+}
+
+.btn {
+    color: var(--white);
+    border: 1px solid var(--red);
+    border-radius: 20px;
+    background-color: var(--red);
+}
+
+.form-container {
+    background-color: var(--white);
+    padding: 32px;
+    box-shadow: 0 2px 5px -1px rgb(0 0 0 / 20%);
+    text-align: center;
+    width: 402px;
+}
+
+.spinner {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    right: 50%;
+}
+
+.logo {
+    display: flex;
+    align-items: flex-start;
+
+    img {
+        flex: 1;
+        height: 165px;
+        object-fit: contain;
+    }
+}
+
+.btn-back {
+    color: var(--primary);
+}
+
+.input-wrapper {
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    color: #333333;
+    font-size: 2.4rem;
+    margin-bottom: 28px;
+}
+
+.email,
+.password {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+
+    &:hover {
+        border-color: var(--black);
+    }
+}
+
+.password {
+    margin-top: 32px;
+}
+
+.forgot-password {
+    font-size: 12px;
+    color: var(--red);
+    padding: 10px 0;
+    text-align: right;
+    cursor: pointer;
+    opacity: 0.9;
+
+    &:hover {
+        opacity: 1;
+    }
+
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+
+    .btn {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+}
+
+.signup {
+    font-size: 1.6rem;
+    color: var(--white);
+}

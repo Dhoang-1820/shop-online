@@ -77,6 +77,45 @@ hr{
 	background-color: var(--darkStaleGray) !important;
 	color: var(--khaki) !important;
 }
+
+.scrollbar-custom {
+    // Scrollbar CSS
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.scrollbar-custom.white {
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
 main {
 	height: auto;
 	background-color: var(--white);

@@ -8,6 +8,7 @@ import { ContactComponent } from './modules/contact/contact.component';
 import { HomeComponent } from './modules/home/home.component';
 import { ShopComponent } from './modules/shop/shop.component';
 import { ProductComponent } from './modules/product/product.component';
+import { LoginComponent } from './modules/login/login.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full',
   }, 
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'cart',
     component: CartComponent
@@ -44,13 +49,13 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'product',
-    component: ProductComponent
+    path: 'product/:id',
+    component: ProductComponent,
   }
 ];
  
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

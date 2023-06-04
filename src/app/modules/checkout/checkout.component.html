@@ -1,105 +1,118 @@
-
 <div class="container">
-    <main>
+    <main *ngIf="!dataLoading">
         <div class="breadcrumb">
             <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
         </div> <!-- End of Breadcrumb-->
 
-        <h2>Billing Detail</h2>
+        <h2>Chi tiết hoá đơn</h2>
         <div class="checkout-page">
             <div class="billing-detail">					
-                <form class="checkout-form">
-                    
-                    <h4>Shipping Detail</h4>
+                <form class="checkout-form" [formGroup]="checkoutInfoForm">
+                    <h4>Thông tin vận chuyển</h4>
                     <table>
                         <tbody>
                             <tr>
                                 <td>
                                     <mat-form-field class="form-field" appearance="fill">
                                         <mat-label>Tên</mat-label>
-                                        <input id="lname" name="lname" matInput>
+                                        <input matInput  formControlName="firstName">
+                                        <mat-error *ngIf="checkoutInfoForm.get('firstName')?.hasError('required')">
+                                            Vui lòng nhập tên!
+                                        </mat-error>
                                     </mat-form-field>
                                 </td>
                                 <td>
                                     <mat-form-field class="form-field" appearance="fill">
-                                        <mat-label>Last Name</mat-label>
-                                        <input id="lname" name="lname" matInput>
+                                        <mat-label>Họ</mat-label>
+                                        <input matInput formControlName="lastName">
+                                        <mat-error *ngIf="checkoutInfoForm.get('lastName')?.hasError('required')">
+                                            Vui lòng nhập họ!
+                                        </mat-error>
                                     </mat-form-field>
                                 </td>
-                            </tr>
-                            <tr>
-                               <td colspan="3">
-                                    <mat-form-field class="form-field" appearance="fill">
-                                        <mat-label>Company Name </mat-label>
-                                        <input id="lname" name="lname" matInput>
-                                    </mat-form-field>
-                               </td>
                             </tr>
                             <tr>
                                 <td>
                                     <mat-form-field appearance="fill">
                                         <mat-label>Provinces</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let province of provices" [value]="province.code" >
+                                        <mat-select formControlName="provices">
+                                            <mat-option *ngFor="let province of provices" [value]="province">
                                             {{province.name}}
                                             </mat-option>
                                         </mat-select>
+                                        <mat-error *ngIf="checkoutInfoForm.get('provices')?.hasError('required')">
+                                            Vui lòng chọn tỉnh thành!
+                                        </mat-error>
                                     </mat-form-field>
                                 </td>
                                 <td>
                                     <mat-form-field appearance="fill">
                                         <mat-label>District</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let district of districts" [value]="district.code" >
+                                        <mat-select formControlName="districts">
+                                            <mat-option *ngFor="let district of districts" [value]="district" >
                                             {{district.name}}
                                             </mat-option>
                                         </mat-select>
+                                        <mat-error *ngIf="checkoutInfoForm.get('districts')?.hasError('required')">
+                                            Vui lòng chọn quận huyện!
+                                        </mat-error>
                                     </mat-form-field>
                                 </td>
                                 <td>
                                     <mat-form-field appearance="fill">
                                         <mat-label>Ward</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let ward of wards" [value]="ward.code" >
+                                        <mat-select formControlName="wards">
+                                            <mat-option *ngFor="let ward of wards" [value]="ward">
                                             {{ward.name}}
                                             </mat-option>
                                         </mat-select>
+                                        <mat-error *ngIf="checkoutInfoForm.get('wards')?.hasError('required')">
+                                            Vui lòng chọn phường xã!
+                                        </mat-error>
                                     </mat-form-field>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
                                     <mat-form-field class="form-field">
-                                        <mat-label>Address</mat-label>
-                                        <textarea matInput rows="5"></textarea>
+                                        <mat-label>Số nhà, tên đường</mat-label>
+                                        <textarea matInput rows="5" formControlName="addressDetail"></textarea>
+                                        <mat-error *ngIf="checkoutInfoForm.get('addressDetail')?.hasError('required')">
+                                            Vui lòng chọn nhập số nhà tên đường!
+                                        </mat-error>
                                     </mat-form-field>
+                                    
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <h4>Contact Detail</h4>
+                    <h4>Thông tin liên hệ</h4>
                     <table>
                         <tbody>
                             <tr>
                                 <td>
                                     <mat-form-field class="form-field" appearance="fill">
                                         <mat-label>Email</mat-label>
-                                        <input id="lname" name="lname" matInput>
+                                        <input matInput formControlName="email">
                                     </mat-form-field>
                                 </td>
                                 <td>
                                     <mat-form-field class="form-field" appearance="fill">
-                                        <mat-label>Mobile</mat-label>
-                                        <input id="lname" name="lname" matInput>
+                                        <mat-label>Số điện thoại</mat-label>
+                                        <input matInput formControlName="phones">
+                                        <mat-error *ngIf="checkoutInfoForm.get('phones')?.hasError('required')">
+                                            Vui lòng chọn nhập số điện thoại!
+                                        </mat-error>
                                     </mat-form-field>
+                                    
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <h4>Additional Information (Optional)</h4>
+                    <h4>Thông tin thêm (tuỳ chọn)</h4>
                     <div class="form-group">
                         <mat-form-field class="form-field">
-                            <mat-label>Note</mat-label>
+                            <mat-label>Lưu ý</mat-label>
                             <textarea matInput rows="5"></textarea>
                         </mat-form-field>
                     </div>	
@@ -107,23 +120,25 @@
             </div>
             <div class="order-summary">
                 <div class="checkout-total">
-                    <h3>Order Summary</h3>
+                    <h3>Tóm tắt</h3>
                     <ul>
-                        <li>Cart Amount: <span>1200</span></li>
-                        <li>Delivery Charges: <span>100</span></li>
-                        <li>Less: Discount @ 10%: <span>-13</span></li>
+                        <li>Số lượng: <span>{{carts.length}}</span></li>
+                        <li>Chi phí vận chuyển: <span>0đ</span></li>
+                        <li>Khuyễn mãi: <span>0%</span></li>
                         <hr>
-                        <li>Total Amount: <span>1287</span></li>
+                        <li>Tổng tiền: <span>{{totalMoney | currency: 'VND': 'đ' }}</span></li>
                         <hr>
-                        <mat-radio-group
-                            class="payment-radio-group"
-                            [(ngModel)]="favoriteSeason">
-                            <mat-radio-button class="payment-radio-button" *ngFor="let season of seasons" [value]="season">
-                                {{season}}
+                        <mat-radio-group class="payment-radio-group">
+                            <mat-radio-button  class="payment-radio-button" [checked]="true">
+                                Thanh toán khi nhận hàng
                             </mat-radio-button>
                         </mat-radio-group>
                         <hr>
-                        <li><input type="submit" name="order" value="Place Order"></li>
+                        <li>
+                            <button class="btn-submit" mat-button (click)="submit()">
+                                Đặt hàng
+                            </button>
+                        </li>
                     </ul>
                 </div>
                 
@@ -131,3 +146,8 @@
         </div>		
     </main> <!-- Main Area -->
 </div>
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+</div>
+<p-toast ></p-toast> 
+  

@@ -8,6 +8,60 @@ main {
   margin-top: 120px;
 }
 
+.filter-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-filter {
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 20px;
+  width: 100%;
+  margin-right: 12px;
+
+  &.active {
+    background-color: var(--red) !important;
+    color: var(--white) !important;
+  }
+}
+
+.progress-spinner {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.progress-spinner:before {
+content: '';
+display: block;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.53);
+}
+
+.spinner {
+position: absolute;
+top: 35%;
+left: 50%;
+right: 50%;
+}
+
+.form-field {
+  width: 100%;
+}
+
 main .breadcrumb {
   padding: 10px 0;
   margin-bottom: 25px;
@@ -21,7 +75,7 @@ main .breadcrumb ul li {
   padding: 0 10px;
 }
 main .breadcrumb ul li a {
-  color: var(--darkStaleGray);
+  color: var(--gray);
   text-decoration: none;
 }
 
@@ -30,7 +84,7 @@ main form.checkout-form .form-group {
   width: calc(100% - 10px);
 }
 main form.checkout-form label {
-  color: var(--darkStaleGray);
+  color: var(--gray);
   display: block;
   margin-bottom: 6px;
 }
@@ -40,11 +94,7 @@ main form.checkout-form .form-group textarea {
   width: 100%;
   padding: 8px 5px;
 }
-main form.checkout-form input:focus,
-main form.checkout-form select:focus,
-main form.checkout-form textarea:focus {
-  outline: 1px solid var(--darkStaleGray);
-}
+
 main h2 {
   color: var(--black);
   font-size: 20px;
@@ -85,8 +135,8 @@ main .account-page .profile .profile-img img {
 }
 main .account-page .profile .profile-img h2 {
   color: var(--black);
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin: 0;
+  font-size: 13px;
 }
 main .account-page .profile ul {
   list-style: none;
@@ -117,7 +167,7 @@ main .account-page .account-detail {
 }
 main .account-page .account-detail input[type="submit"] {
   background-color: var(--khaki);
-  color: var(--darkStaleGray);
+  color: var(--gray);
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
@@ -129,12 +179,11 @@ main .account-page .account-detail input[type="submit"] {
   width: 100%;
 }
 main .account-page .account-detail input[type="submit"]:hover {
-  background-color: var(--darkStaleGray);
+  background-color: var(--gray);
   color: var(--khaki);
 }
 
 main .account-page .account-detail table {
-  border: 1px solid #eee;
   width: 100%;
 }
 
@@ -142,5 +191,12 @@ main .account-page .account-detail table th,
 main .account-page .account-detail table td {
   padding: 8px;
   text-align: center;
-  border: 1px solid #eee;
+}
+
+.btn-update {
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 20px;
+  width: 100%;
+  margin-top: 15px;
 }

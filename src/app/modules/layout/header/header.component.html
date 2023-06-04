@@ -23,50 +23,73 @@
                 </div> <!-- logo -->
                 <div class="shop-icon">
                     <div class="dropdown">
-                        <div class="action-wrapper">
-                            <i class="pi pi-shopping-cart icon-header"></i>
-                            <span>
-                                Giỏ hàng (1)
-                            </span>
-                        </div>
-                        <div class="dropdown-menu cart-item">
-                            <div class="cart-list">
-                                <h5 class="cart-list-heading"></h5>
-                                <div class="list-item"> 
-                                    <div class="product-img">
-                                        <img src="assets/img/product/img5.jpg" />
+                        <ng-container *ngIf="cartInfo; else isHasCart">
+                            <div class="action-wrapper" routerLink="/cart">
+                                <i class="pi pi-shopping-cart icon-header"></i>
+                                <span>
+                                    Giỏ hàng ({{cartInfo.length}})
+                                </span>
+                            </div>
+                        </ng-container>
+                        <ng-template #isHasCart>
+                            <div class="action-wrapper" routerLink="/cart">
+                                <i class="pi pi-shopping-cart icon-header"></i>
+                                <span>
+                                    Giỏ hàng
+                                </span>
+                            </div>
+                        </ng-template>
+                        <div class='cart-list' *ngIf="cartInfo">
+                            <h5 class='cart-list-heading'>Sản phẩm đã thêm</h5>
+                            <div class='list-item scrollbar-custom'>
+                                <div class='wrapper' *ngFor="let cart of cartInfo">
+                                    <div class='product-img'>
+                                        <img class='img' [src]="cart.product.imageBase64" />
                                     </div>
-                                    <div class="description">
-                                        <p class="title">product</p>
-                                        <p class="units">ĐVT: product</p>
-                                        <div class="details">
-                                            <p class="quantity">x</p>
-                                            <p class="price">
-                                               price
+                                    <div class='description'>
+                                        <p class='title'>{{cart.product.productName}}</p>
+                                        <p class='units'>ĐVT: {{cart.product.calculationUnit}}</p>
+                                        <div class='details'>
+                                            <p class='quantity'>x{{cart.quantity}}</p>
+                                            <p class='price'>
+                                                {{cart.product.price | currency: 'VND': 'đ' }}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="cart-total">
-                                <span class="total-quantity"></span>
-                                <span></span>
-                                <span class="total-money"> </span>
+                            <div class='cart-total'>
+                                <span class='total-quantity'>
+                                    Có tổng số <b>{{cartInfo.length}}</b> sản phẩm
+                                </span>
+                                <span>Tổng tiền:</span>
+                                <span class='total-money'></span>
                             </div>
-                            <div class="cart-footer">
-                                <button class="cart-btn"></button>
-                                <button class="cart-btn active">
-    
+                            <div class='cart-footer'>
+                                <button routerLink="/cart" mat-button class="cart-btn">
+                                    <span>Xem chi tiết</span>
+                                </button>
+                                <button routerLink="/checkout" mat-button class="cart-btn">
+                                    <span>Thanh toán ngay</span>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown">
-                        <div class="action-wrapper">
-                            <i class="pi pi-user icon-header"></i>
-                            <span>
-                                Tài khoản
-                            </span>
+                        <div class="action-wrapper" (click)="onclick()">
+                            <ng-container *ngIf="!userInfo; else isUser">
+                                <i class="pi pi-user icon-header"></i>
+                                <span >
+                                    Tài khoản
+                                </span>
+                            </ng-container>
+                            <ng-template #isUser>
+                                <img [src]="userInfo.imageBase64" class="user-img">
+                                <span class="user-name">
+                                    {{userInfo.firstName}} {{userInfo.lastName}}
+                                </span>
+                            </ng-template>
+                            
                         </div>
                         <div class="dropdown-menu user">
                             <ul>
