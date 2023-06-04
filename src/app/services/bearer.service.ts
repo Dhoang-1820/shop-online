@@ -5,20 +5,20 @@ import { BehaviorSubject, Subject } from 'rxjs'
     providedIn: 'root',
 })
 export class BearerService {
-    private missionAnnouncedSource = new Subject<string>()
-    private missionConfirmedSource = new Subject<string>()
 
-    missionAnnounced$ = this.missionAnnouncedSource.asObservable()
-    missionConfirmed$ = this.missionConfirmedSource.asObservable()
+    private valuePassedCourse = new Subject<any>();
+    valuePassed$ = this.valuePassedCourse.asObservable();
 
-    // Service message commands
-    announceMission(mission: string) {
-        this.missionAnnouncedSource.next(mission)
-    }
-
-    confirmMission(astronaut: string) {
-        this.missionConfirmedSource.next(astronaut)
-    }
+    private headerSource = new Subject<any>();
+    headerPass = this.headerSource.asObservable();
 
     constructor() {}
+
+    passValue(value: any): void {
+        this.valuePassedCourse.next(value);
+    }
+
+    pass2Header(value: any): void {
+        this.headerSource.next(value);
+    }
 }

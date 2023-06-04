@@ -1,92 +1,63 @@
 <div class="container">
-    <main>
+    <main *ngIf="!dataLoading">
         <div class="breadcrumb">
             <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
         </div> <!-- End of Breadcrumb-->
 
-        <h2>Shopping Cart</h2>
+        <h2>Sản phẩm trong giỏ hàng</h2>
         <div class="cart-page">
             <div class="cart-items">					
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="3">Cart Items</th>
+                            <th colspan="3">Sản phẩm</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="width: 20%;"><img src="img/product/img1.jpg"></td>
+                        <tr *ngFor="let cart of carts">
+                            <td style="width: 20%;"><img [src]="cart.product.imageBase64"></td>
                             <td style="width: 60%;">
-                                <h2>Product Title</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h2>{{cart.product.productName}}</h2>
+                                <p>{{cart.product.productDescription}}</p>
                                 <br>
-                                <h3>Price: Rs.1200</h3>
+                                <h3 style="color: red;">{{cart.product.price  | currency: 'VND': 'đ' }}</h3>
                                 <br>
-                                <a href="">x</a> Remove
-                            </td>
-                            <td class="qty" style="width: 15%;">
-                                <div class="prev">-</div>
-                                <div class="next">+</div>
-                                <input type="number" name="cartNumber" class="cartNumber" value="1" min="1" max="10">
-                                <br><br>
-                                <h3>Rs.1200</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 20%;"><img src="img/product/img2.jpg"></td>
-                            <td style="width: 60%;">
-                                <h2>Product Title</h2>
-                                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <br>
-                                <h3>Price: Rs.1200</h3>
-                                <br>
-                                <a href="">x</a> Remove
+                                <button (click)="removeCart(cart.product.id)" mat-button class="btn-remove">Xoá</button> 
                             </td>
                             <td class="qty" style="width: 15%;">
                                 <div>
-                                    <p-inputNumber styleClass="input-styling" [(ngModel)]="value18" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" 
+                                    <p-inputNumber styleClass="input-styling" [(ngModel)]="cart.quantity"
+                                        (onInput)="onChangeProductQuantity(cart)"
+                                        [showButtons]="true" 
+                                        buttonLayout="horizontal" 
+                                        inputId="horizontal" 
+                                        spinnerMode="horizontal" 
                                         [allowEmpty]="false" [min]="0"
+                                        tabindex="-1"
+                                        pInputNumber 
                                         decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
                                     </p-inputNumber>
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="width: 20%;"><img src="img/product/img3.jpg"></td>
-                            <td style="width: 60%;">
-                                <h2>Product Title</h2>
-                                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <br>
-                                <h3>Price: Rs.1200</h3>
-                                <br>
-                                <a href="">x</a> Remove
-                            </td>
-                            <td class="qty" style="width: 15%;">
-                                <div class="prev">-</div>
-                                <div class="next">+</div>
-                                <input type="number" name="cartNumber" class="cartNumber" value="1" min="1" max="10">
-                                <br><br>
-                                <h3>Rs.1200</h3>
-                            </td>
-                        </tr>						
+                        					
                     </tbody>	
                 </table>
-                <div class="pagination">
-                    <p-paginator [rows]="10" [totalRecords]="120"></p-paginator>
-                </div>
             </div>
             <div class="cart-summary">
                 <div class="checkout-total">
-                    <h3>Cart Summary</h3>
+                    <h3>Tóm tắt</h3>
                     <ul>
-                        <li>Number of Products x 15</li>
-                        <li>Number of items x 20</li>
+                        <li>Tổng số sản phẩm: {{carts.length}}</li>
                         <hr>
-                        <li>Cart Total <span style="float: right;">Rs.1200</span></li>
-                        <li><a href="checkout.html">Go to Checkout</a></li>
+                        <li>Tạm tính: <span style="float: right;">{{totalMoney | currency: 'VND': 'đ'}}</span></li>
+                        <li><button routerLink="/checkout" class="btn-remove long" mat-button href="checkout.html">Thanh toán</button></li>
                     </ul>
                 </div>
             </div>
         </div>		
     </main> <!-- Main Area -->
 </div>
+<div class="progress-spinner" *ngIf="dataLoading || addCartLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+  </div>

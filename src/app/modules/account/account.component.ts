@@ -1,167 +1,288 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+import { MenuItem } from 'primeng/api'
+import { finalize } from 'rxjs'
+import { AddressService } from 'src/app/services/address.service'
+import { AuthenService } from 'src/app/services/authen.service'
+import { BearerService } from 'src/app/services/bearer.service'
+import { CartService } from 'src/app/services/cart.service'
+import { OrderService } from 'src/app/services/order.service'
+import { ProductService } from 'src/app/services/product.service'
+import { UserService } from 'src/app/services/user.service'
 
 interface Product {
-  id?:string;
-  code?:string;
-  name?:string;
-  description?:string;
-  price?:number;
-  quantity?:number;
-  inventoryStatus?:string;
-  category?:string;
-  image?:string;
-  rating?:number;
+    date?: any
+    id?: number
+    orderDetailList?: []
+    paymentMode?: string
+    status?: string
+    totalPrice?: number
+    userId?: number
+}
+
+interface Filter {
+    id?: number,
+    display?: string;
 }
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-  
-  items!: MenuItem[];
-    
-  home!: MenuItem;
+    items!: MenuItem[]
+    provices: any[]
+    districts: any[]
+    wards: any[]
+    provinceSelected: any
+    districtSelected: any
+    wardSelected: any
+    home!: MenuItem
+    orders: any[]
 
-  products: Product[];
+    orderShowed: Product[]
+    userInfo: any
+    checkoutInfoForm: FormGroup;
 
-  constructor() { 
-    this.products = [
-      {
-        "id": "1000",
-        "code": "f230fh0g3",
-        "name": "Bamboo Watch",
-        "description": "Product Description",
-        "image": "bamboo-watch.jpg",
-        "price": 65,
-        "category": "Accessories",
-        "quantity": 24,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1002",
-        "code": "zz21cz3c1",
-        "name": "Blue Band",
-        "description": "Product Description",
-        "image": "blue-band.jpg",
-        "price": 79,
-        "category": "Fitness",
-        "quantity": 2,
-        "inventoryStatus": "LOWSTOCK",
-        "rating": 3
-      },
-      {
-        "id": "1003",
-        "code": "244wgerg2",
-        "name": "Blue T-Shirt",
-        "description": "Product Description",
-        "image": "blue-t-shirt.jpg",
-        "price": 29,
-        "category": "Clothing",
-        "quantity": 25,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1004",
-        "code": "h456wer53",
-        "name": "Bracelet",
-        "description": "Product Description",
-        "image": "bracelet.jpg",
-        "price": 15,
-        "category": "Accessories",
-        "quantity": 73,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1005",
-        "code": "av2231fwg",
-        "name": "Brown Purse",
-        "description": "Product Description",
-        "image": "brown-purse.jpg",
-        "price": 120,
-        "category": "Accessories",
-        "quantity": 0,
-        "inventoryStatus": "OUTOFSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1006",
-        "code": "bib36pfvm",
-        "name": "Chakra Bracelet",
-        "description": "Product Description",
-        "image": "chakra-bracelet.jpg",
-        "price": 32,
-        "category": "Accessories",
-        "quantity": 5,
-        "inventoryStatus": "LOWSTOCK",
-        "rating": 3
-      },
-      {
-        "id": "1007",
-        "code": "mbvjkgip5",
-        "name": "Galaxy Earrings",
-        "description": "Product Description",
-        "image": "galaxy-earrings.jpg",
-        "price": 34,
-        "category": "Accessories",
-        "quantity": 23,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1008",
-        "code": "vbb124btr",
-        "name": "Game Controller",
-        "description": "Product Description",
-        "image": "game-controller.jpg",
-        "price": 99,
-        "category": "Electronics",
-        "quantity": 2,
-        "inventoryStatus": "LOWSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1009",
-        "code": "cm230f032",
-        "name": "Gaming Set",
-        "description": "Product Description",
-        "image": "gaming-set.jpg",
-        "price": 299,
-        "category": "Electronics",
-        "quantity": 63,
-        "inventoryStatus": "INSTOCK",
-        "rating": 3
+    passwordForm: FormGroup;
+
+    filter: Filter[];
+
+    firstName: string
+    lastName: string
+    userProvince: string
+    userDistrict: string
+    userWard: string
+    userAddressDetail: string
+    userEmail: string
+    userPhone: string
+
+    isAccountScreen: boolean
+    isOrderScreen: boolean
+    isChangePasswordScreen: boolean
+
+    dataLoading: boolean;
+
+    selectedFilter: number;
+
+    oldPass: string;
+    newPass: string;
+    confirmPass: string;
+
+    addressUserGeneral: string;
+
+
+    constructor(private router: Router, private addressService: AddressService, private orderService: OrderService, private userService: UserService, private auth: AuthenService, private bearerService: BearerService, private productService: ProductService, ) {
+        this.orderShowed = []
+        this.provices = []
+        this.districts = []
+        this.wards = []
+        this.orders = []
+        this.firstName = ''
+        this.lastName = ''
+        this.userEmail = ''
+        this.userPhone = ''
+        this.userProvince = ''
+        this.userDistrict = ''
+        this.userWard = ''
+        this.userAddressDetail = ''
+        this.oldPass = ''
+        this.newPass = ''
+        this.confirmPass = ''
+        this.addressUserGeneral = ''
+        this.dataLoading = false
+
+        this.isAccountScreen = true
+        this.isOrderScreen = false
+        this.isChangePasswordScreen = false
+
+        this.checkoutInfoForm = new FormGroup({
+            firstName: new FormControl(this.firstName, [Validators.required]),
+            lastName: new FormControl(this.lastName, [Validators.required]),
+            provices: new FormControl(this.userProvince, [Validators.required]),
+            districts: new FormControl(this.userDistrict, [Validators.required]),
+            wards: new FormControl(this.userWard, [Validators.required]),
+            addressDetail: new FormControl(this.userAddressDetail, [Validators.required]),
+            email: new FormControl(this.userEmail, [Validators.email]),
+            phone: new FormControl(this.userPhone, [Validators.required]),
+        })
+
+        this.passwordForm = new FormGroup({
+            oldPass: new FormControl(this.oldPass, [Validators.required]),
+            newPass: new FormControl(this.newPass, [Validators.required]),
+            confirmPass: new FormControl(this.confirmPass, [Validators.required])
+        })
+
+        this.selectedFilter = 1;
+
+        this.filter = [
+            {
+                id: 1,
+                display: 'Đang xử lý'
+            },
+            {
+                id: 2,
+                display: 'Đang giao'
+            },
+            {
+                id: 3,
+                display: 'Đã giao'
+            },
+            {
+                id: 4,
+                display: 'Đã huỷ'
+            },
+        ]
+    }
+
+    ngOnInit(): void {
+        this.userInfo = this.auth.getUserLoggedIn();
+        this.items = [{ label: 'Danh mục' }, { label: 'Tài khoản' }]
+        this.home = { icon: 'pi pi-home' }
+        this.checkoutInfoForm.get('firstName')?.valueChanges.subscribe(firstName => this.firstName = firstName)
+        this.checkoutInfoForm.get('lastName')?.valueChanges.subscribe(lastName => this.lastName = lastName)
+        this.checkoutInfoForm.get('email')?.valueChanges.subscribe(userEmail => this.userEmail = userEmail)
+        this.checkoutInfoForm.get('phone')?.valueChanges.subscribe(userPhone => this.userPhone = userPhone)
+        this.checkoutInfoForm.get('addressDetail')?.valueChanges.subscribe(userAddressDetail => this.userAddressDetail = userAddressDetail)
+        this.getAllProvices();
+        this.checkoutInfoForm.get('provices')?.valueChanges.subscribe(provices => {
+            this.userProvince = provices.name;
+            this.provinceSelected = provices;
+            this.getDistrictsOfProvice();
+        })
+        this.checkoutInfoForm.get('districts')?.valueChanges.subscribe(districts => {
+            this.userDistrict = districts.name;
+            this.districtSelected = districts;
+            this.getWardsOfDistrict();
+        })
+        this.checkoutInfoForm.get('wards')?.valueChanges.subscribe(userWard => {
+            this.userWard = userWard;
+            this.wardSelected = userWard
+        })
+
+        this.passwordForm.get('oldPass')?.valueChanges.subscribe(oldPass => {
+            this.oldPass = oldPass;
+            if (this.oldPass !== this.userInfo.password) {
+                this.passwordForm.get('oldPass')?.setErrors({'wrong': true});
+            }
+        })
+        this.passwordForm.get('newPass')?.valueChanges.subscribe(newPass => this.newPass = newPass)
+        this.passwordForm.get('confirmPass')?.valueChanges.subscribe(confirmPass => this.confirmPass = confirmPass)
+
+        this.userInfo = this.auth.getUserLoggedIn();
+
+        this.checkoutInfoForm.get('firstName')?.setValue(this.userInfo.firstName);
+        this.checkoutInfoForm.get('lastName')?.setValue(this.userInfo.lastName);
+        this.checkoutInfoForm.get('email')?.setValue(this.userInfo.email);
+        this.checkoutInfoForm.get('phone')?.setValue(this.userInfo.phone);
+        
+
+        this.getUserAddressById()
+    }
+
+    getUserAddressById(): void {
+        this.userService.getUserAddressById(this.userInfo.addressIds[0]).pipe(
+            finalize(() => {
+                console.log(this.addressUserGeneral)
+                this.checkoutInfoForm.get('addressDetail')?.setValue(this.addressUserGeneral);
+            })
+        ).subscribe(data => this.addressUserGeneral = data.addressGeneral)
+    }
+
+
+    getAllProvices(): void {
+        this.addressService.getProvices().pipe(
+          finalize(() => console.log(this.provices))
+        ).subscribe(data => this.provices = data)
       }
-    ]
-  }
-
-  
-
-  ngOnInit(): void {
-    this.items = [
-      {label: 'Category'},
-      {label: 'Men'},
-      {label: 'Watches'}
-    ];
     
-    this.home = {icon: 'pi pi-home'};
-  }
+      getDistrictsOfProvice(): void {
+        this.wards = [];
+        this.addressService.getDistrictsOfProvince(this.provinceSelected.code).pipe(
+          finalize(() => console.log('districts',this.districts))
+        ).subscribe(data => this.districts = data.districts)
+      }
+    
+      getWardsOfDistrict(): void {
+        this.addressService.getWardsOfDistrict(this.districtSelected.code).pipe(
+          finalize(() => console.log('wards', this.wards))
+        ).subscribe(data => this.wards = data.wards)
+      }
+    
 
+    getAccount(): void {
+        this.isAccountScreen = true
+        this.isOrderScreen = false
+        this.isChangePasswordScreen = false
+    }
+
+    getOrder(): void {
+        this.isAccountScreen = false
+        this.isOrderScreen = true
+        this.isChangePasswordScreen = false
+        this.getAllOrderByUserId();
+       
+    }
+
+    changePassword(): void {
+        this.isAccountScreen = false
+        this.isOrderScreen = false
+        this.isChangePasswordScreen = true
+    }
+
+    getAllOrderByUserId(): void {
+        this.dataLoading = true
+        this.orderService.getOrderByUserId(this.userInfo.id).pipe(
+            finalize(() => {
+                this.dataLoading = false;
+                this.orderShowed = this.orders;
+                this.orderShowed.forEach(item => item.date = new Date(item.date));
+                this.changeFilter({id: 1, display: 'Đang xử lý'});
+            }),
+        )
+        .subscribe((order) => (this.orders = order))
+    }
+
+    changeFilter(target: any): void {
+        console.log(target)
+        this.selectedFilter = target.id;
+        this.orderShowed = this.orders.filter(item => item.status === target.display);
+        this.orderShowed.forEach(item => item.date = new Date(item.date));
+    }
+
+    changeUserPassword(): void {
+        let isValid = this.passwordForm.valid
+        if (isValid) {
+            this.userInfo.password = this.newPass;
+            this.userService.editUser(this.userInfo).pipe().subscribe(data => console.log(data))
+        } else {
+            this.passwordForm.markAllAsTouched();
+        }
+        
+    }
+
+    updateUser(): void {
+        let isValid = this.checkoutInfoForm.valid
+        if (isValid) {
+            this.userInfo.firstName = this.firstName;
+            this.userInfo.lastName = this.lastName;
+            this.userInfo.email = this.userEmail;
+            this.userInfo.phone = this.userPhone;
+            this.userService.editUser(this.userInfo).pipe().subscribe(data => this.userInfo = data)
+            this.auth.logout();
+            this.auth.login(this.userInfo)
+            this.bearerService.pass2Header({});
+           
+        } else {
+            this.checkoutInfoForm.markAllAsTouched();
+        }
+    }
+
+    logOut(): void {
+        this.auth.logout();
+        this.bearerService.pass2Header({});
+        this.router.navigate(['/home'])
+    }
 }

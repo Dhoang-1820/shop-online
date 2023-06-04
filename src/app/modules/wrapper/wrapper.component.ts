@@ -1,19 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { BearerService } from 'src/app/services/bearer.service';
+import { Component, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { BearerService } from 'src/app/services/bearer.service'
 
 @Component({
     selector: 'app-wrapper',
     templateUrl: './wrapper.component.html',
     styleUrls: ['./wrapper.component.scss'],
-    providers: [BearerService],
 })
 export class WrapperComponent implements OnInit {
-    astronauts = ['Lovell', 'Swigert', 'Haise'];
-    history: string[] = [];
-    missions = ['Fly to the moon!', 'Fly to mars!', 'Fly to Vegas!'];
-    nextMission = 0;
+    subscription: Subscription;
+    message!: string;
+    isFetch!: boolean;
 
-    constructor() {}
+    constructor(private bearerService: BearerService) {
+        this.isFetch = false;
+        this.subscription = bearerService.valuePassed$.subscribe(msg => {
+            this.message = msg;
+            this.checkCart();
+        })
+        
+    }
 
     ngOnInit(): void {}
+
+    checkCart(): void {
+        this.isFetch = !this.isFetch;
+    }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <main>
+  <main *ngIf="!dataLoading">
     <div class="banner">
       <div class="carousel-wrapper">
         <div class="carousel">
@@ -31,164 +31,77 @@
         </div>
       </div>
     </div>
-
+    
     <div class="new-product-section">
       <div class="product-content">
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img1.jpg" />
+        <div class="product" *ngFor="let product of products">
+          <a [routerLink]="['/product', product.id]">
+            <img [src]="product.imageBase64"/>
           </a>
           <div class="product-detail">
-            <h3>Men's / Watches</h3>
-            <h2>Gray Color Men's Watch</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.4500/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img2.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Pants</h3>
-            <h2>Levi's Jeans Pant</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.2000/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img3.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Watches</h3>
-            <h2>Black Men's Watch</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.4000/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img4.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Shoes</h3>
-            <h2>Nick Black Sneakers</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.3200/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img5.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Glasses</h3>
-            <h2>Wood Frame Sun Glass</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.1200/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img6.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Women's / Hand Bags</h3>
-            <h2>Leather Hand Bag</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.3800/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img7.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Shoes</h3>
-            <h2>Men's Sneaker</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.3500/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img8.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Women's / Hand Bags</h3>
-            <h2>Brown Leather Hand Bag</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.5200/-</p>
+            <h3>{{product.productName}}</h3>
+            <h2>{{product.productDescription}}</h2>
+            <button mat-button class="btn-add" (click)="addToCart(product.id)">
+              <svg
+                  class="btn-add-cart__svg"
+                  focusable="false"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  data-testid="AddShoppingCartIcon"
+                  style="font-size: 16px; margin-right: 4px; vertical-align: text-bottom"
+              >
+              <path
+                  d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"
+              >
+              </path>
+              </svg>
+              <span>Thêm vào giỏ hàng</span>
+            </button>
+            <p>{{product.price | currency: 'VND': 'đ' }}</p>
           </div>
         </div>
       </div>
     </div>
-    <!-- New Product Section -->
-
-    <div class="collection">
-      <div class="men-collection">
-        <h2>Men's Collection</h2>
-      </div>
-      <div class="women-collection">
-        <h2>Women's Collection</h2>
-      </div>
-    </div>
-    <!-- Collection Section -->
-
     <div class="new-product-section">
       <div class="product-section-heading">
         <h2>Sản phẩm đề xuất<img src="assets/img/icons/good_quality.png" /></h2>
         <h3>Những sản phẩm tốt nhất được đề xuất cho bạn</h3>
       </div>
       <div class="product-content">
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img1.jpg" />
+        <div class="product" *ngFor="let item of recommendedProducts">
+          <a  >
+            <img [src]="item.imageBase64" />
           </a>
           <div class="product-detail">
-            <h3>Men's / Watches</h3>
-            <h2>Gray Color Men's Watch</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.4500/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img2.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Pants</h3>
-            <h2>Levi's Jeans Pant</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.2000/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img3.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Watches</h3>
-            <h2>Black Men's Watch</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.4000/-</p>
-          </div>
-        </div>
-        <div class="product">
-          <a href="product.html">
-            <img src="assets/img/product/img4.jpg" />
-          </a>
-          <div class="product-detail">
-            <h3>Men's / Shoes</h3>
-            <h2>Nick Black Sneakers</h2>
-            <button class="btn-add" mat-button>Add to Cart</button>
-            <p>Rs.3200/-</p>
+            <h3>{{item.productName}}</h3>
+            <h2>{{item.productDescription}}</h2>
+            <button class="btn-add" mat-button (click)="addToCart(item.id)">
+              <svg
+                  class="btn-add-cart__svg"
+                  focusable="false"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  data-testid="AddShoppingCartIcon"
+                  style="font-size: 16px; margin-right: 4px; vertical-align: text-bottom"
+              >
+              <path
+                  d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"
+              >
+              </path>
+              </svg>
+              <span>Thêm vào giỏ hàng</span>
+          </button>
+            <p>{{item.price | currency: 'VND': 'đ' }}</p>
           </div>
         </div>
       </div>
     </div>
     <!-- Recommend Product Section -->
   </main>
-  <!-- Main Area -->
+  
 </div>
+<div class="progress-spinner" *ngIf="dataLoading || addCartLoading">
+  <p-progressSpinner class="spinner"></p-progressSpinner>
+</div>
+
+

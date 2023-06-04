@@ -1,11 +1,56 @@
+.progress-spinner {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
+/* Transparent Overlay */
+.progress-spinner:before {
+content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.53);
+}
+
+.spinner {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  right: 50%;
+}
+
+.container {
+  min-height: 75vh;
+}
+
+.btn-remove {
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 20px;
+
+  &.long {
+    width: 100%;
+  }
+}
 
 ::ng-deep .input-styling {
   height: 35px;
 }
 
 ::ng-deep .input-styling input {
-  width: 34px !important;
+  width: 40px !important;
+  text-align: center;
 }
 
 ::ng-deep .input-styling button {

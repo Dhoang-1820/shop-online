@@ -7,117 +7,185 @@
         <div class="account-page">
             <div class="profile">
                 <div class="profile-img">
-                    <img src="img/product/img5.jpg">
-                    <h2>John Doe</h2>
-                    <p>john_doe@mail.com</p>
+                    <img [src]="userInfo.imageBase64">
+                    <h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
+                    <p>{{userInfo.email}}</p>
                 </div>
                 <ul>
-                    <li><a href="account.html" class="active">Account <span>></span></a></li>
-                    <li><a href="orders.html">My Orders <span>></span></a></li>
-                    <li><a href="change-password.html">Change Password <span>></span></a></li>
-                    <li><a href="">Logout <span>></span></a></li>
+                    <li><a  [class.active]="isAccountScreen" (click)="getAccount()">Tài khoản<span>></span></a></li>
+                    <li><a [class.active]="isOrderScreen" (click)="getOrder()">Đơn hàng<span>></span></a></li>
+                    <li><a  [class.active]="isChangePasswordScreen" (click)="changePassword()">Đổi mật khẩu<span>></span></a></li>
+                    <li><a (click)="logOut()">Đăng xuất<span>></span></a></li>
                 </ul>
             </div>
-            <!-- <div class="account-detail">
-                <h2>Account</h2>
+            <div class="account-detail" *ngIf="isAccountScreen">
+                <h2>Tài khoản</h2>
                 <div class="billing-detail">					
-                    <form class="checkout-form">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label>First Name</label>
-                                <input type="text" id="fname" name="fname" value="John">
-                            </div>
-                            <div class="form-group">
-                                <label>Last Name</label>
-                                <input type="text" id="lname" name="lname" value="Doe">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Company Name (Optional)</label>
-                            <input type="text" id="cname" name="cname">
-                        </div>
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <select id="country" name="country">
-                                    <option selected>---Select a Country---</option>
-                                    <option value="pakistan">Pakistan</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>City</label>
-                                <select id="city" name="city">
-                                    <option selected>---Select a City---</option>
-                                    <option value="karachi">Karachi</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea style="resize:none" id="address" name="address" rows="3">xyz area, street 24 </textarea>
-                        </div>
-                        <div class="form-inline">					
-                            <div class="form-group">
-                                <label>Tel</label>
-                                <input type="text" id="tel" name="tel" minlength="11" maxlength="11" value="555-XXXXXXX">
-                            </div>
-                            <div class="form-group">
-                                <label>Mobile</label>
-                                <input type="text" id="mobile" name="mobile" minlength="11" maxlength="11" value="555-XXXXXXX">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label></label>
-                            <input type="submit" id="update" name="update" value="Update">
-                        </div>
-                    </form>		
+                    <form class="checkout-form" [formGroup]="checkoutInfoForm">
+                        <h4>Thông tin tài khoản</h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field" appearance="fill">
+                                            <mat-label>Tên</mat-label>
+                                            <input matInput  formControlName="firstName">
+                                            <mat-error *ngIf="checkoutInfoForm.get('firstName')?.hasError('required')">
+                                                Vui lòng nhập tên!
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field" appearance="fill">
+                                            <mat-label>Họ</mat-label>
+                                            <input matInput formControlName="lastName">
+                                            <mat-error *ngIf="checkoutInfoForm.get('lastName')?.hasError('required')">
+                                                Vui lòng nhập họ!
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Provinces</mat-label>
+                                            <mat-select formControlName="provices">
+                                                <mat-option *ngFor="let province of provices" [value]="province">
+                                                {{province.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="checkoutInfoForm.get('provices')?.hasError('required')">
+                                                Vui lòng chọn tỉnh thành!
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>District</mat-label>
+                                            <mat-select formControlName="districts">
+                                                <mat-option *ngFor="let district of districts" [value]="district" >
+                                                {{district.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="checkoutInfoForm.get('districts')?.hasError('required')">
+                                                Vui lòng chọn quận huyện!
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Ward</mat-label>
+                                            <mat-select formControlName="wards">
+                                                <mat-option *ngFor="let ward of wards" [value]="ward">
+                                                {{ward.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error *ngIf="checkoutInfoForm.get('wards')?.hasError('required')">
+                                                Vui lòng chọn phường xã!
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Số nhà, tên đường</mat-label>
+                                            <textarea matInput rows="5" formControlName="addressDetail"></textarea>
+                                            <mat-error *ngIf="checkoutInfoForm.get('addressDetail')?.hasError('required')">
+                                                Vui lòng chọn nhập số nhà tên đường!
+                                            </mat-error>
+                                        </mat-form-field>
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4>Thông tin liên hệ</h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field" appearance="fill">
+                                            <mat-label>Email</mat-label>
+                                            <input matInput formControlName="email">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field" appearance="fill">
+                                            <mat-label>Số điện thoại</mat-label>
+                                            <input matInput formControlName="phone">
+                                            <mat-error *ngIf="checkoutInfoForm.get('phone')?.hasError('required')">
+                                                Vui lòng chọn nhập số điện thoại!
+                                            </mat-error>
+                                        </mat-form-field>
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>	
+                    <button mat-button class="btn-update" (click)="updateUser()">Cập nhật</button>
                 </div>
-            </div>	 -->
-            <!-- <div class="account-detail">
+            </div>	
+            <div class="account-detail"  *ngIf="isChangePasswordScreen">
                 <h2>Change Password</h2>
                 <div class="billing-detail">					
-                    <form class="checkout-form">
-                        <div class="form-group">
-                            <label>Old Password</label>
-                            <input type="password" id="old_password" name="old_password">
-                        </div>
+                    <form class="checkout-form" [formGroup]="passwordForm">
+                        <mat-form-field class="form-field" appearance="fill">
+                            <mat-label>Mật khẩu cũ</mat-label>
+                            <input matInput formControlName="oldPass" type="password">
+                            <mat-error *ngIf="passwordForm.get('oldPass')?.hasError('required')">
+                                Vui lòng nhập mật khẩu cũ!
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('oldPass')?.hasError('wrong')">
+                                Mật khẩu cũ không chính xác!
+                            </mat-error>
+                        </mat-form-field>
+                       
                         <div class="form-inline">
-                            <div class="form-group">
-                                <label>New Password</label>
-                                <input type="password" id="new_password" name="new_password">
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input type="password" id="confirm_password" name="confirm_password">
-                            </div>
+                            <mat-form-field class="form-field" appearance="fill"  style="margin-right: 15px;">
+                                <mat-label>Mật khẩu mới</mat-label>
+                                <input matInput formControlName="newPass" type="password">
+                                <mat-error *ngIf="passwordForm.get('newPass')?.hasError('required')">
+                                    Vui lòng nhập mật khẩu mới!
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="form-field" appearance="fill">
+                                <mat-label>Nhập lại mật khẩu mới</mat-label>
+                                <input matInput formControlName="confirmPass" type="password">
+                                <mat-error *ngIf="passwordForm.get('confirmPass')?.hasError('required')">
+                                    Vui lòng nhập lại mật khẩu mới!
+                                </mat-error>
+                            </mat-form-field>
                         </div>
-                        <div class="form-group">
-                            <label></label>
-                            <input type="submit" id="update_pass" name="update_pass" value="Update">
-                        </div>
+                        <button mat-button class="btn-update" (click)="changeUserPassword()">Cập nhật</button>
                     </form>		
                 </div>
-            </div>		 -->
-            <div class="account-detail">					
-                <p-table [value]="products" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+            </div>		
+            <div class="account-detail" *ngIf="isOrderScreen && !dataLoading">	
+                <div class="filter-btn">
+                    <button (click)="changeFilter(item)" mat-button class="btn-filter" [class.active]="item.id === selectedFilter" *ngFor="let item of filter">{{item.display}}</button>
+                    <!-- <button mat-button class="btn-filter">Đang giao</button>
+                    <button mat-button class="btn-filter">Đã giao</button>
+                    <button mat-button class="btn-filter">Đã huỷ</button> -->
+                </div>
+                <p-table [value]="orderShowed" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
                     <ng-template  pTemplate="header">
                         <tr>
-                            <th>Date</th>
-                            <th>Order Ref#</th>
-                            <th>Amount</th>
-                            <th>Payment Mode</th>
-                            <th>Status</th>
-                            <th>View</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th>Hình thức thanh toán</th>
+                            <th>Tổng tiền</th>
+                            <th>Chi tiết</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body"  let-product>
                         <tr>
-                            <td>{{product.code}}</td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.category}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td>{{product.quantity}}</td>
+                            <td>{{product.date | date:'dd/M/YYYY' }}</td>
+                            <td>{{product.status}}</td>
+                            <td>{{product.paymentMode}}</td>
+                            <td>{{product.totalPrice | currency: 'VND': 'đ' }}</td>
+                            <td>Chi tiết</td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -125,3 +193,6 @@
         </div>		
     </main> <!-- Main Area -->
 </div>
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+  </div>

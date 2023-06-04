@@ -30,6 +30,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import { WrapperComponent } from './modules/wrapper/wrapper.component'
 import {TableModule} from 'primeng/table';
+import { BearerService } from './services/bearer.service';
+import { SpinnerModule } from 'primeng/spinner';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ButtonModule } from 'primeng/button';
+import { LoginComponent } from './modules/login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -44,7 +51,8 @@ import {TableModule} from 'primeng/table';
     ShopComponent,
     CheckoutComponent,
     ProductComponent,
-    WrapperComponent
+    WrapperComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +72,14 @@ import {TableModule} from 'primeng/table';
     MatSelectModule,
     MatRadioModule,
     MatButtonModule,
-    TableModule
+    TableModule,
+    SpinnerModule,
+    ProgressSpinnerModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [BearerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

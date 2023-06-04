@@ -1,0 +1,47 @@
+<div class='wrapper' >
+    <div class='form-container' *ngIf="!dataLoading">
+        <div class='header'>
+            <div class='logo'>
+                <div class='btn-back'>
+                    <a routerLink="">
+                    </a>
+                </div>
+                <!-- <img src={images.logoGreenText} alt='logo' /> -->
+            </div>
+            <div class='title'>Đăng nhập</div>
+        </div>
+        <div class='content'>
+            <form  [formGroup]="userValidations">
+                <mat-form-field class="email" appearance="fill">
+                    <input  placeholder='Email hoặc số điện thoại' matInput formControlName="userName">
+                    <mat-error *ngIf="userValidations.get('userName')?.hasError('required')">
+                      Vui lòng nhập email!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="password" appearance="fill">
+                    <input  placeholder='Mật khẩu' matInput formControlName="password" type="password">
+                    <mat-error *ngIf="userValidations.get('password')?.hasError('required') || userValidations.get('password')?.hasError('incorrect')">
+                      Vui lòng nhập mật khẩu!
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <a  class='forgot-password'>
+                Quên mật khẩu?
+            </a>
+        </div>
+        <div class='btn-group'>
+            <button class="btn" mat-button (click)="login()">
+                <span>Đăng nhập</span>
+            </button>
+            <button class="btn" mat-button>
+                <span>Trang chủ</span>
+            </button>
+            <button to={routes.signup} class='btn signup' mat-button>
+                Tạo tài khoản
+            </button>
+        </div>
+    </div>
+   
+</div>
+<p-progressSpinner *ngIf="dataLoading" class="spinner"></p-progressSpinner>
+<p-toast ></p-toast> 
