@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, retry, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../modules/model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,22 @@ export class UserService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/users/login?name=${username}&password=${password}`, null).pipe(
+      retry(1),
+      take(1),
+      delay(500)
+    ) 
+  }
+
+  signup(user: User): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/users/`, user).pipe(
+      retry(1),
+      take(1),
+      delay(500)
+    ) 
+  }
+
+  forgotpass(email: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/users/forgotpass?mail=${email}`, null, {responseType: 'text'}).pipe(
       retry(1),
       take(1),
       delay(500)

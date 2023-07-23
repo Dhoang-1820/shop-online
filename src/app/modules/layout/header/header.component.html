@@ -5,20 +5,37 @@
                 <div class="logo">
                     <div>
                         <a href="index.html">
-                            <img src="./assets/img/icons/online_shopping.png">
+                            <img src="assets/img/logo-VPP-AIO-trang.png">
                             <div class="logo-text">
-                                <p class="big-logo">Ecommerce</p>
-                                <p class="small-logo">online shop</p>
+                                <p class="big-logo">Văn phòng phẩm</p>
+                                <p class="small-logo">stationery</p>
                             </div>
                         </a>
                     </div>
                     <div class="search-bar">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="search" placeholder="Tìm kiếm sản phẩm muốn mua">
+                                <input (input)="searchProduct($event)" type="text" class="form-control" name="search" placeholder="Tìm kiếm sản phẩm muốn mua">
                                 <img src="./assets/img/icons/search.png">
                             </div>
                         </form>
+                        <div class="dropdown-search" *ngIf="searchResult.length > 0">
+                            <ul>
+                                <div class='list-item scrollbar-custom'>
+                                    <div class='wrapper' *ngFor="let product of searchResult">
+                                       <div class="result" (click)="getProduct(product)">
+                                            <div class='product-img'>
+                                                <img class='img' [src]="product.imageBase64" />
+                                            </div>
+                                            <div class='description'>
+                                                <p class='title'>{{product.productName}}</p>
+                                                <p class='units'>ĐVT: {{product.calculationUnit}}</p>
+                                            </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </div> <!-- logo -->
                 <div class="shop-icon">
@@ -32,7 +49,7 @@
                             </div>
                         </ng-container>
                         <ng-template #isHasCart>
-                            <div class="action-wrapper" routerLink="/cart">
+                            <div class="action-wrapper" routerLink="/login">
                                 <i class="pi pi-shopping-cart icon-header"></i>
                                 <span>
                                     Giỏ hàng
@@ -62,7 +79,7 @@
                                 <span class='total-quantity'>
                                     Có tổng số <b>{{cartInfo.length}}</b> sản phẩm
                                 </span>
-                                <span>Tổng tiền:</span>
+                                <span>Tổng tiền: {{totalMoney | currency: 'VND': 'đ'}}</span>
                                 <span class='total-money'></span>
                             </div>
                             <div class='cart-footer'>
@@ -76,25 +93,35 @@
                         </div>
                     </div>
                     <div class="dropdown">
-                        <div class="action-wrapper" (click)="onclick()">
-                            <ng-container *ngIf="!userInfo; else isUser">
-                                <i class="pi pi-user icon-header"></i>
-                                <span >
-                                    Tài khoản
-                                </span>
+                        <div class="action-wrapper">
+                            <ng-container *ngIf="!userInfo; else isUser" >
+                                <div routerLink="/login" class="user-wrapper">
+                                    <i class="pi pi-user icon-header"></i>
+                                    <span >
+                                        Tài khoản
+                                    </span>
+                                </div>
                             </ng-container>
                             <ng-template #isUser>
-                                <img [src]="userInfo.imageBase64" class="user-img">
-                                <span class="user-name">
-                                    {{userInfo.firstName}} {{userInfo.lastName}}
-                                </span>
+                                <div routerLink="/account" class="user-wrapper">
+                                    <img [src]="userInfo.imageBase64" class="user-img">
+                                    <span class="user-name">
+                                        {{userInfo.firstName}} {{userInfo.lastName}}
+                                    </span>
+                                </div>
+                                
                             </ng-template>
+
                             
                         </div>
                         <div class="dropdown-menu user">
                             <ul>
-                                <li><a routerLink="/account">Tài khoản của tôi</a></li>
-                                <li><a routerLink="/cart">Đơn hàng của tôi</a></li>
+                                <li *ngIf="userInfo"><a routerLink="/account">Tài khoản của tôi</a></li>
+                                <li *ngIf="!userInfo"><a routerLink="/login">Tài khoản của tôi</a></li>
+                                <li *ngIf="userInfo"><a routerLink="/account/order">Đơn hàng của tôi</a></li>
+                                <li *ngIf="!userInfo"><a routerLink="/login">Đơn hàng của tôi</a></li>
+
+                                <li *ngIf="userInfo"><a routerLink="/admin" *ngIf="userInfo.permissionId == 1">Admin</a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,0 +1,72 @@
+<div class='wrapper' >
+    <div class='form-container' *ngIf="!dataLoading">
+        <div class='header'>
+            <div class='logo'>
+                <div class='btn-back'>
+                    <a routerLink="">
+                    </a>
+                </div>
+                <!-- <img src={images.logoGreenText} alt='logo' /> -->
+            </div>
+            <div class='title'>Đăng ký</div>
+        </div>
+        <div class='content'>
+            <form  [formGroup]="userValidations">
+                <mat-form-field class="form-field" appearance="fill">
+                    <input  placeholder='Tên đăng nhập' matInput formControlName="userName">
+                    <mat-error *ngIf="userValidations.get('userName')?.hasError('required')">
+                      Vui lòng nhập tên đăng nhập!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="fill">
+                    <input  placeholder='Mật khẩu' matInput formControlName="password" type="password">
+                    <mat-error *ngIf="userValidations.get('password')?.hasError('required') || userValidations.get('password')?.hasError('incorrect')">
+                      Vui lòng nhập mật khẩu!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="fill">
+                    <mat-label>Tên</mat-label>
+                    <input matInput  formControlName="firstName">
+                    <mat-error *ngIf="userValidations.get('firstName')?.hasError('required')">
+                        Vui lòng nhập tên!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="fill">
+                    <mat-label>Họ</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-error *ngIf="userValidations.get('lastName')?.hasError('required')">
+                        Vui lòng nhập họ!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" formControlName="email">
+                    <mat-error *ngIf="userValidations.get('email')?.hasError('required')">
+                        Vui lòng chọn nhập email!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="fill">
+                    <mat-label>Số điện thoại</mat-label>
+                    <input matInput formControlName="phone">
+                    <mat-error *ngIf="userValidations.get('phone')?.hasError('required')">
+                        Vui lòng chọn nhập số điện thoại!
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <a  class='forgot-password'>
+                Quên mật khẩu?
+            </a>
+        </div>
+        <div class='btn-group'>
+            <button class="btn" mat-button (click)="signup()">
+                <span>Đăng ký</span>
+            </button>
+            <button class="btn" mat-button routerLink="/home">
+                <span>Trang chủ</span>
+            </button>
+        </div>
+    </div>
+   
+</div>
+<p-progressSpinner *ngIf="dataLoading" class="spinner"></p-progressSpinner>
+<p-toast ></p-toast> 

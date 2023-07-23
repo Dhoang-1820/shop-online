@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   userName!: string;
   password!: string;
   dataLoading: boolean;
+  isForgotPass: boolean;
+  forgotPassLoading: boolean;
 
   constructor(private bearerService: BearerService, private auth: AuthenService, private router: Router, private userService: UserService, private messageService: MessageService) { 
     this.userValidations = new FormGroup({
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
       password: new FormControl(this.password, [Validators.required])
     })
     this.dataLoading = false;
+    this.forgotPassLoading = false;
+    this.isForgotPass = false;
   }
 
   ngOnInit(): void {
@@ -58,7 +62,25 @@ export class LoginComponent implements OnInit {
     }
     
   }
+
+  forgotPass(): void {
+    this.isForgotPass = true;
+  }
+
+  submitForgotPass(): void {
+    let result: string;
+    this.forgotPassLoading = true;
+    this.userService.forgotpass(this.userName).pipe(
+      finalize(() => {
+        this.forgotPassLoading = false;
+        this.showToastForgotPass(`Mật khẩu đã được gửi về địa chỉ email: ${result}`)
+      })
+    ).subscribe(data => result = data)
+  }
   
+  showToastForgotPass(message: any) {
+    this.messageService.add({ severity: 'success', summary: 'Sucess', detail: message });
+  }
 
   showToastError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Sai mật khẩu hoặc tên đăng nhập' });

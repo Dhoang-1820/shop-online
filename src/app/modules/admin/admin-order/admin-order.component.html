@@ -1,0 +1,72 @@
+
+
+<main>
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a routerLink="/admin">Trang chủ</a></li>
+                <li><a class="active" routerLink="/admin/order">Đơn hàng</a></li>
+                <li><a routerLink="/admin/product">Sản phẩm</a></li>
+                <li><a routerLink="/admin/category">Danh mục</a></li>
+                <li><a routerLink="/admin/brand">Nhãn hiệu</a></li>
+            </ul>
+        </div>
+        <div class="content" >
+            <h3>Đơn hàng</h3>
+            <div class="content-detail"  *ngIf="!dataLoading">
+                <div class="filter-btn">
+                    <button (click)="changeFilter(item)" mat-button class="btn-filter" [class.active]="item.id === selectedFilter" *ngFor="let item of filter">{{item.display}}</button>
+                    <!-- <button mat-button class="btn-filter">Đang giao</button>
+                    <button mat-button class="btn-filter">Đã giao</button>
+                    <button mat-button class="btn-filter">Đã huỷ</button> -->
+                </div>
+                <p-table [value]="orderShowed" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                    <ng-template  pTemplate="header">
+                        <tr>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th>Hình thức thanh toán</th>
+                            <th>Tổng tiền</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"  let-product>
+                        <tr>
+                            <td>{{product.date | date:'dd/M/YYYY' }}</td>
+                            <td>{{product.status}}</td>
+                            <td>{{product.paymentMode}}</td>
+                            <td>{{product.totalPrice | currency: 'VND': 'đ' }}</td>
+                            <td *ngIf="selectedFilter == 1">
+                                <button mat-button class="btn" (click)="confirmOrder(product)" style="margin-right: 10px;">
+                                    Xác nhận
+                                </button>
+                                <button mat-button class="btn gray" (click)="cancelOrder(product)">
+                                    Huỷ
+                                </button>
+                            </td>
+                            <td *ngIf="selectedFilter == 2">
+                                <button class="btn" mat-button (click)="deliveredOrder(product)">
+                                   Đã giao
+                                </button>
+                            </td>
+                            <td *ngIf="selectedFilter == 3">
+                                <button disabled="true" mat-button >
+                                  Đã giao
+                                </button>
+                            </td>
+                            <td *ngIf="selectedFilter == 4">
+                                <button  mat-button disabled="true">
+                                  Đã huỷ
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>		
+</main> 
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+  </div>

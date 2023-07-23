@@ -21,4 +21,20 @@ export class OrderService {
       delay(500)
     )
   }
+
+  changeOrderStatus(order: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/orders/${order.id}`, order).pipe(
+      retry(2),
+      take(3),
+      delay(500)
+    )
+  }
+
+  getAllOrder(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/orders`).pipe(
+      retry(2),
+      take(3),
+      delay(500)
+    )
+  }
 }
