@@ -21,7 +21,7 @@
                 </div>
                 <hr />
                 <div class="product-description">
-                    <p>{{ product.productDescription }}</p>
+                    <p>Giảm giá: {{ product.discount }}%</p>
                 </div>
                 <hr />
                 <div class="product-cart">
@@ -44,13 +44,6 @@
                             </p-inputNumber>
                         </div>
                     </div>
-
-                    <div id="wishlist-form">
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <input type="checkbox" class="wishlist" name="wishlist" />Thêm vào yêu thích
-                        </div>
-                    </div>
-                    
                     <p-button class="btn-add" [loading]="addCartLoading" (click)="addToCart(product.id) ">
                         <svg
                             class="btn-add-cart__svg"
@@ -92,12 +85,11 @@
             </div>
             <div class="product-content">
                 <div class="product" *ngFor="let item of product.recommended">
-                    <a [routerLink]="['/product', item.id]">
+                    <a [routerLink]="['/product', item.id]" (click)="getProductById(item.id)">
                         <img [src]="item.imageBase64" />
                     </a>
                     <div class="product-detail">
                         <h3>{{item.productName}}</h3>
-                        <h2>{{item.productDescription}}</h2>
                         <div class="product-footer">
                             <button class="btn-add" mat-button (click)="addToCartWithOne(item.id)">
                                 <svg

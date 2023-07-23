@@ -1,0 +1,168 @@
+
+<main>
+    
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a routerLink="/admin">Trang chủ</a></li>
+                <li><a routerLink="/admin/order">Đơn hàng</a></li>
+                <li><a class="active" routerLink="/admin/product">Sản phẩm</a></li>
+                <li><a routerLink="/admin/category">Danh mục</a></li>
+                <li><a routerLink="/admin/brand">Nhãn hiệu</a></li>
+            </ul>				
+        </div>
+        <div class="content">
+            <h3>Sản phẩm</h3>
+            <div class="content-data" *ngIf="!dataLoading">
+                <div class="content-form">
+                    <form [formGroup]="productForm">
+                        <h4>Thêm sản phẩm</h4>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Tên sản phẩm</mat-label>
+                                    <input matInput  formControlName="productName">
+                                    <mat-error *ngIf="productForm.get('productName')?.hasError('required')">
+                                        Vui lòng nhập tên!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Giá sản phẩm</mat-label>
+                                    <input matInput type="number" formControlName="price">
+                                    <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+                                        Vui lòng nhập giá sản phẩm!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="form-field" appearance="fill">
+                                <mat-label>Mô tả sản phẩm</mat-label>
+                                <input matInput  formControlName="description">
+                                <mat-error *ngIf="productForm.get('description')?.hasError('required')">
+                                    Vui lòng nhập mô tả sản phẩm!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="form-field" appearance="fill">
+                                <mat-label>Đơn vị tính</mat-label>
+                                <input matInput  formControlName="calculationUnit">
+                                <mat-error *ngIf="productForm.get('calculationUnit')?.hasError('required')">
+                                    Vui lòng nhập đơn vị tính!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="form-field" appearance="fill">
+                                <mat-label>Số lượng</mat-label>
+                                <input matInput type="number" formControlName="quantity">
+                                <mat-error *ngIf="productForm.get('quantity')?.hasError('required')">
+                                    Vui lòng nhập số lượng!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Số lượng đã bán</mat-label>
+                                    <input matInput type="number" formControlName="sold">
+                                    <mat-error *ngIf="productForm.get('sold')?.hasError('required')">
+                                        Vui lòng số lượng đã bán!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Giảm giá</mat-label>
+                                    <input matInput type="number"  formControlName="discount">
+                                    <mat-error *ngIf="productForm.get('discount')?.hasError('required')">
+                                        Vui lòng nhập giảm giá!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Danh mục</mat-label>
+                                    <mat-select formControlName="categoryId" [(value)]="selectedCategory">
+                                        <mat-option *ngFor="let category of categories" [value]="category">
+                                        {{category.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="productForm.get('categoryId')?.hasError('required')">
+                                        Vui lòng chọn danh mục!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nhãn hiệu</mat-label>
+                                    <mat-select formControlName="brandId" [(value)]="selectedBrand">
+                                        <mat-option *ngFor="let brand of brands" [value]="brand" >
+                                        {{brand.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="productForm.get('brandId')?.hasError('required')">
+                                        Vui lòng chọn nhãn hiệu!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                               
+                                <label>Ảnh</label>
+                                <input type="file" name="image" multiple (change)="onChange($event)">
+                            </div>
+                        </div>												
+                        <div class="form-group">
+                            <button class="btn" mat-button (click)="addProduct()">
+                                Lưu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="content-detail">
+                    <h4>Tất cả sản phẩm</h4>
+                    <p-table [value]="products" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                        <ng-template  pTemplate="header">
+                            <tr>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                                <th>Danh mục</th>
+                                <th>Nhãn hiệu</th>
+                                <th>Chỉnh sửa</th>
+                                <th>Xoá</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-product>
+                            <tr>
+                                <td>{{product.productName}}</td>
+                                <td>{{product.price | currency: 'VND': 'đ' }}</td>
+                                <td>{{getCategoryById(product.categoryId).name}}</td>
+                                <td>{{getBrandById(product.brandId).name}}</td>
+                                <td> 
+                                    <button class="btn" mat-button (click)="editProduct(product)">
+                                        Sửa
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn" mat-button (click)="deleteProduct(product)">
+                                        Xoá
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>		
+</main> 
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+</div>
+<p-toast ></p-toast> 

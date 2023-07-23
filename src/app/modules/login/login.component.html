@@ -13,35 +13,38 @@
         <div class='content'>
             <form  [formGroup]="userValidations">
                 <mat-form-field class="email" appearance="fill">
-                    <input  placeholder='Email hoặc số điện thoại' matInput formControlName="userName">
+                    <input  placeholder='Email' matInput formControlName="userName">
                     <mat-error *ngIf="userValidations.get('userName')?.hasError('required')">
                       Vui lòng nhập email!
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="password" appearance="fill">
+                <mat-form-field class="password" appearance="fill" *ngIf="!isForgotPass">
                     <input  placeholder='Mật khẩu' matInput formControlName="password" type="password">
                     <mat-error *ngIf="userValidations.get('password')?.hasError('required') || userValidations.get('password')?.hasError('incorrect')">
                       Vui lòng nhập mật khẩu!
                     </mat-error>
                 </mat-form-field>
             </form>
-            <a  class='forgot-password'>
+            <a class='forgot-password' (click)="forgotPass()" *ngIf="!isForgotPass">
                 Quên mật khẩu?
             </a>
         </div>
         <div class='btn-group'>
-            <button class="btn" mat-button (click)="login()">
+            <button class="btn" mat-button (click)="login()" *ngIf="!isForgotPass">
                 <span>Đăng nhập</span>
             </button>
-            <button class="btn" mat-button>
+            <button class="btn" mat-button (click)="submitForgotPass()" *ngIf="isForgotPass">
+                <span>Tiếp tục</span>
+            </button>
+            <button class="btn" mat-button routerLink="/home">
                 <span>Trang chủ</span>
             </button>
-            <button to={routes.signup} class='btn signup' mat-button>
-                Tạo tài khoản
+            <button routerLink="/signup" class='btn signup' mat-button>
+                Đăng ký
             </button>
         </div>
     </div>
    
 </div>
-<p-progressSpinner *ngIf="dataLoading" class="spinner"></p-progressSpinner>
+<p-progressSpinner *ngIf="dataLoading || forgotPassLoading" class="progress-spinner"></p-progressSpinner>
 <p-toast ></p-toast> 

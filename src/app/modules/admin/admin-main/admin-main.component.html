@@ -1,0 +1,86 @@
+
+<main>
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a class="active" routerLink="/admin">Trang chủ</a></li>
+                <li><a routerLink="/admin/order">Đơn hàng</a></li>
+                <li><a routerLink="/admin/product">Sản phẩm</a></li>
+                <li><a routerLink="/admin/category">Danh mục</a></li>
+                <li><a routerLink="/admin/brand">Nhãn hiệu</a></li>
+            </ul>				
+        </div>
+        <div class="content dashboard">
+            <h3>Dashboard</h3>
+            <div class="content-data" *ngIf="!dataLoading">
+                <div class="content-detail">
+                    <h4>Sản phẩm số lượng còn ít</h4>
+                    <p-table [value]="lowStockProduct" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                        <ng-template  pTemplate="header">
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Danh mục</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-product>
+                            <tr>
+                                <td>{{product.productName}}</td>
+                                <td>{{product.price}}</td>
+                                <td>{{getCategoryById(product.categoryId).name}}</td>
+                                <td>{{product.quantity}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="content-detail">
+                    <h4>Đơn hàng gần đây</h4>
+                    <p-table [value]="recentOrder" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                        <ng-template  pTemplate="header">
+                            <tr>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Hình thức thanh toán</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-product>
+                            <tr>
+                                <td>{{product.date}}</td>
+                                <td>{{product.totalPrice}}</td>
+                                <td>{{product.status}}</td>
+                                <td>{{product.paymentMode}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <div class="content-detail">
+                    <h4>Đơn hàng đã hoàn thành</h4>
+                    <p-table [value]="completedOrder" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                        <ng-template  pTemplate="header">
+                            <tr>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Hình thức thanh toán</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-product>
+                            <tr>
+                                <td>{{product.date}}</td>
+                                <td>{{product.totalPrice}}</td>
+                                <td>{{product.status}}</td>
+                                <td>{{product.paymentMode}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>		
+</main> 
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { MenuItem } from 'primeng/api'
+import { MenuItem, MessageService } from 'primeng/api'
 import { finalize } from 'rxjs'
 import { AddressService } from 'src/app/services/address.service'
 import { AuthenService } from 'src/app/services/authen.service'
@@ -30,6 +30,7 @@ interface Filter {
     selector: 'app-account',
     templateUrl: './account.component.html',
     styleUrls: ['./account.component.scss'],
+    providers: [MessageService]
 })
 export class AccountComponent implements OnInit {
     items!: MenuItem[]
@@ -74,7 +75,7 @@ export class AccountComponent implements OnInit {
     addressUserGeneral: string;
 
 
-    constructor(private router: Router, private addressService: AddressService, private orderService: OrderService, private userService: UserService, private auth: AuthenService, private bearerService: BearerService, private productService: ProductService, ) {
+    constructor(private messageService: MessageService, private router: Router, private addressService: AddressService, private orderService: OrderService, private userService: UserService, private auth: AuthenService, private bearerService: BearerService, private productService: ProductService, ) {
         this.orderShowed = []
         this.provices = []
         this.districts = []
@@ -135,6 +136,7 @@ export class AccountComponent implements OnInit {
                 display: 'Đã huỷ'
             },
         ]
+       
     }
 
     ngOnInit(): void {
@@ -179,6 +181,9 @@ export class AccountComponent implements OnInit {
         this.checkoutInfoForm.get('phone')?.setValue(this.userInfo.phone);
         
 
+        if (this.router.url.includes('order')) {
+            this.getOrder()
+        }
         this.getUserAddressById()
     }
 
@@ -255,8 +260,16 @@ export class AccountComponent implements OnInit {
     changeUserPassword(): void {
         let isValid = this.passwordForm.valid
         if (isValid) {
+            this.dataLoading = true;
             this.userInfo.password = this.newPass;
-            this.userService.editUser(this.userInfo).pipe().subscribe(data => console.log(data))
+            this.userService.editUser(this.userInfo).pipe(
+                finalize(() => {
+                    this.dataLoading = false
+                    this.showToastSuccess()
+                    this.auth.logout()
+                    this.auth.login(this.userInfo)
+                })
+            ).subscribe(data => this.userInfo)
         } else {
             this.passwordForm.markAllAsTouched();
         }
@@ -270,14 +283,22 @@ export class AccountComponent implements OnInit {
             this.userInfo.lastName = this.lastName;
             this.userInfo.email = this.userEmail;
             this.userInfo.phone = this.userPhone;
-            this.userService.editUser(this.userInfo).pipe().subscribe(data => this.userInfo = data)
-            this.auth.logout();
-            this.auth.login(this.userInfo)
-            this.bearerService.pass2Header({});
-           
+            this.userService.editUser(this.userInfo).pipe(
+                finalize(() => {
+                    this.auth.logout();
+                        this.auth.login(this.userInfo)
+                        this.bearerService.pass2Header({});
+                    this.showToastSuccess()
+                })
+            ).subscribe(data => this.userInfo = data)
+
         } else {
             this.checkoutInfoForm.markAllAsTouched();
         }
+    }
+
+    showToastSuccess() {
+        this.messageService.add({ severity: 'success', summary: 'Sucess', detail: 'Sửa tài khoản thành công' });
     }
 
     logOut(): void {

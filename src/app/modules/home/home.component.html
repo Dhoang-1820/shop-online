@@ -17,14 +17,14 @@
           <div>
             <img
               width="307px"
-              src="https://ss-hn.fptvds.vn/images/2023/02/nam-moi-ron-rang-hang-ngan-uu-dai-614x397.jpg"
+              src="assets/img/SmallBannerT7-02.png"
               alt="img1"
             />
           </div>
           <div>
             <img
               width="307px"
-              src="https://ss-hn.fptvds.vn/images/2022/sub-banner-bua-com-ngon-lanh-copy-01.jpg"
+              src="assets/img/Tamlinh_mainbanner_T7_Smallbanner_310x210.png"
               alt="img1"
             />
           </div>
@@ -40,7 +40,6 @@
           </a>
           <div class="product-detail">
             <h3>{{product.productName}}</h3>
-            <h2>{{product.productDescription}}</h2>
             <button mat-button class="btn-add" (click)="addToCart(product.id)">
               <svg
                   class="btn-add-cart__svg"
@@ -69,12 +68,11 @@
       </div>
       <div class="product-content">
         <div class="product" *ngFor="let item of recommendedProducts">
-          <a  >
+          <a  [routerLink]="['/product', item.id]">
             <img [src]="item.imageBase64" />
           </a>
           <div class="product-detail">
             <h3>{{item.productName}}</h3>
-            <h2>{{item.productDescription}}</h2>
             <button class="btn-add" mat-button (click)="addToCart(item.id)">
               <svg
                   class="btn-add-cart__svg"

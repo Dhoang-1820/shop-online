@@ -16,6 +16,24 @@ header {
   }
 }
 
+.dropdown-search {
+  position: absolute;
+  top: 42px;
+  background-color: white;
+  left: -5px;
+  right: 0;
+  width: 386px;
+}
+
+.result {
+  display: flex;
+}
+
+.user-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 ::ng-deep .mat-icon {
   font-size: 22px;
 }
@@ -356,6 +374,7 @@ header .search-bar {
   width: 385px;
   height: 40px;
   margin-left: 35px;
+  position: relative;
 
   .form-group img {
     position: absolute;
@@ -377,7 +396,6 @@ header .form-group input {
   position: absolute;
   right: 5px;
   border: 0;
-  border-radius: 30px;
   outline: 0;
   padding: 5px 12px;
   font-size: 14px;

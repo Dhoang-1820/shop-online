@@ -1,0 +1,83 @@
+
+<main>
+    
+    <div class="main-content">
+        <div class="sidebar">
+            <h3>Menu</h3>
+            <ul>
+                <li><a routerLink="/admin">Trang chủ</a></li>
+                <li><a routerLink="/admin/order">Đơn hàng</a></li>
+                <li><a routerLink="/admin/product">Sản phẩm</a></li>
+                <li><a class="active" routerLink="/admin/category">Danh mục</a></li>
+                <li><a routerLink="/admin/brand">Nhãn hiệu</a></li>
+            </ul>			
+        </div>
+        <div class="content">
+            <h3>Danh mục sản phẩm</h3>
+            <div class="content-data" *ngIf="!dataLoading">
+                <div class="content-form">
+                    <form [formGroup]="categoryForm">
+                        <h4>Thêm danh mục</h4>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Tên danh mục</mat-label>
+                                    <input matInput  formControlName="name">
+                                    <mat-error *ngIf="categoryForm.get('name')?.hasError('required')">
+                                        Vui lòng nhập tên danh mục!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field class="form-field" appearance="fill">
+                                    <mat-label>Note</mat-label>
+                                    <input matInput  formControlName="note">
+                                    <mat-error *ngIf="categoryForm.get('note')?.hasError('required')">
+                                        Vui lòng nhập ote!
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            
+                        </div>	
+                        <div class="form-group">
+                            <label>Ảnh</label>
+                            <input type="file" name="image" multiple (change)="onChange($event)">
+                        </div>									
+                        <div class="form-group">
+                            <button class="btn" mat-button (click)="addCategory()">
+                                Lưu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="content-detail">
+                    <h4>Tất cả danh mục sản phẩm</h4>
+                    <p-table [value]="categories" [scrollable]="true" scrollHeight="450px"  [tableStyle]="{'min-width': '45rem'}">
+                        <ng-template  pTemplate="header">
+                            <tr>
+                                <th>Tên</th>
+                                <th>Note</th>
+                                <th>Chỉnh sửa</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-category>
+                            <tr>
+                                <td>{{category.name}}</td>
+                                <td>{{category.note }}</td>
+                                <td> 
+                                    <button class="btn" mat-button (click)="editCategory(category)">
+                                        Sửa
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>		
+
+</main> 
+<div class="progress-spinner" *ngIf="dataLoading">
+    <p-progressSpinner class="spinner"></p-progressSpinner>
+  </div>

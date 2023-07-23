@@ -5,7 +5,7 @@ export class OrderDetailList  {
 }
 
 export class Order {
-    public date!: Date;
+    public date!: any;
     public status!: string;
     public totalPrice!: number;
     public paymentMode!: string;

@@ -8,6 +8,7 @@ import { BearerService } from 'src/app/services/bearer.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Order, OrderDetailList } from '../model/Order';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -49,7 +50,7 @@ export class CheckoutComponent implements OnInit {
 
   orderDetailList: OrderDetailList;
 
-  constructor(private messageService: MessageService, private orderService: CheckoutService, private bearerService: BearerService, private cartService: CartService, private addressService: AddressService, private auth: AuthenService) { 
+  constructor(private router: Router, private messageService: MessageService, private orderService: CheckoutService, private bearerService: BearerService, private cartService: CartService, private addressService: AddressService, private auth: AuthenService) { 
     this.orderSubmit = new Order();
     this.orderDetailList = new OrderDetailList();
     this.provices = [];
@@ -177,7 +178,7 @@ export class CheckoutComponent implements OnInit {
 
   prepareRequest(): void {
     this.getTotalMoney();
-    this.orderSubmit.date = new Date();
+    this.orderSubmit.date = Date.now();
     this.orderSubmit.paymentMode = this.paymenMode;
     this.orderSubmit.status = "Đang xử lý";
     this.orderSubmit.totalPrice = this.totalMoney;
@@ -202,6 +203,7 @@ export class CheckoutComponent implements OnInit {
       this.orderService.saveOrder(this.orderSubmit).pipe(
         finalize(() => {
           this.deleteUserCart();
+          this.router.navigate(['/home'])
         })
       ).subscribe(data => console.log(data))
     } else {
